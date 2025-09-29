@@ -1,0 +1,20 @@
+<!--
+  Top navigation bar
+-->
+
+<div id="topbar-wrapper">
+  <div id="topbar" class="container-fluid d-flex align-items-center justify-content-between px-3">
+    <span id="breadcrumb">
+      {% unless page.layout == 'home' %}
+        <span>
+          <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
+        </span>
+        <span>{{ page.title }}</span>
+      {% endunless %}
+    </span>
+
+    <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i>
+
+    <div id="topbar-title">{{ site.title }}</div>
+  </div>
+</div>

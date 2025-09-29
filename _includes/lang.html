@@ -1,0 +1,11 @@
+{% comment %}
+  Detect the language of current page
+{% endcomment %}
+
+{% assign lang = page.lang | default: site.lang | default: 'en' %}
+
+{% if lang == 'en' %}
+  {% assign prefer_mode = 'data-mode="dark"' %}
+{% else %}
+  {% assign prefer_mode = 'data-mode="dark"' %}
+{% endif %}
