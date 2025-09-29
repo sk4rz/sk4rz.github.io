@@ -74,7 +74,7 @@ objdump -d target | grep -A 20 "check_password"
 
 This gives us the disassembly of our `check_password` function:
 
-```assembly
+```c
 0000000000001149 <check_password>:
     1149:	f3 0f 1e fa          	endbr64 
     114d:	55                   	push   %rbp
@@ -106,7 +106,7 @@ gdb ./target
 
 ### Setting Breakpoints
 
-```gdb
+```c
 (gdb) break check_password
 (gdb) break main
 (gdb) run
@@ -116,7 +116,7 @@ gdb ./target
 
 When we hit the breakpoint in `check_password`:
 
-```gdb
+```c
 (gdb) x/s $rbp-0xe
 0x7fffffffddf2:	"sk4rz_secret"
 
@@ -126,7 +126,7 @@ When we hit the breakpoint in `check_password`:
 
 ### Stack Analysis
 
-```gdb
+```c
 (gdb) x/16x $rsp
 0x7fffffffddd0:	0xffffdde0	0x00007fff	0x00000000	0x00000001
 0x7fffffffdde0:	0x6f72775f	0x705f676e	0x77737361	0x00007264
@@ -174,7 +174,7 @@ for char in 'abcdefghijklmnopqrstuvwxyz':
 
 Let's examine the comparison loop in detail:
 
-```assembly
+```c
 # String length comparison
 call   strlen@plt
 mov    %rax,%rbx      # Store input length

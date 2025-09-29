@@ -1,4 +1,4 @@
-<!-- STEALTH FILTER - PRESERVES ORIGINAL CHIRPY DESIGN 100% --><!-- ULTRA AGGRESSIVE SIDEBAR FILTER - PRESERVE CHIRPY DESIGN --><!-- PRESERVE ORIGINAL CHIRPY DESIGN - ONLY FILTER CONTENT --><!-- CLEAN LANGUAGE SYSTEM --><!-- ULTIMATE NUCLEAR SOLUTION --><!-- FORCE REMOVE DUPLICATES - AGGRESSIVE SOLUTION --><!-- Clean Language System --><!-- Simple Language System --><!-- Simple Language System --><!-- Enhanced Language System -->
+<!-- LANGUAGE SWITCHING FUNCTIONS - SERVER SIDE FILTERING --><!-- STEALTH FILTER - PRESERVES ORIGINAL CHIRPY DESIGN 100% --><!-- ULTRA AGGRESSIVE SIDEBAR FILTER - PRESERVE CHIRPY DESIGN --><!-- PRESERVE ORIGINAL CHIRPY DESIGN - ONLY FILTER CONTENT --><!-- CLEAN LANGUAGE SYSTEM --><!-- ULTIMATE NUCLEAR SOLUTION --><!-- FORCE REMOVE DUPLICATES - AGGRESSIVE SOLUTION --><!-- Clean Language System --><!-- Simple Language System --><!-- Simple Language System --><!-- Enhanced Language System -->
 
 <script>
 
@@ -41,6 +41,48 @@ function switchToLanguage(targetLang) {
     } else if (currentPath.includes('/tags')) {  }
 
       newPath = '/es/tags/';
+
+    } else if (currentPath.includes('/archives')) {  if (targetLang === 'es') {
+
+      newPath = '/es/archives/';
+
+    } else {    if (currentPath.includes('/es/')) return;  var path = window.location.pathname;
+
+      newPath = '/es/';
+
+    }    
+
+  } else {
+
+    if (!currentPath.includes('/es/')) return;    if (currentPath === '/' || currentPath === '/index.html') {function switchToLanguage(targetLang) {
+
+    newPath = currentPath.replace('/es', '') || '/';
+
+  }      newPath = '/es/';
+
+  
+
+  window.location.href = newPath;    } else if (currentPath.includes('/about')) {  var currentPath = window.location.pathname;  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';function getCurrentLanguage() {<script>
+
+}
+
+      newPath = '/es/about/';
+
+function switchToSpanish() {
+
+  switchToLanguage('es');    } else if (currentPath.includes('/categories')) {  var newPath;
+
+}
+
+      newPath = '/es/categories/';
+
+function switchToEnglish() {
+
+  switchToLanguage('en');    } else if (currentPath.includes('/tags')) {  }
+
+}
+
+</script>      newPath = '/es/tags/';
 
     } else if (currentPath.includes('/archives')) {  if (targetLang === 'es') {
 
