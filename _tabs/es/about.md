@@ -4,6 +4,7 @@ icon: fas fa-info-circle
 order: 4
 lang: es
 title: "Acerca de"
+permalink: /es/about/
 ---
 
 ## {{ site.data.locales.es.author.about_title }}

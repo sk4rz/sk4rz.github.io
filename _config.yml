@@ -14,7 +14,7 @@ timezone: America/New_York
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: "sk4rz Blog - Security & Development" # the main title
+title: "sk4rz Blog" # the main title
 
 tagline: "Technical blog focused on cybersecurity, malware analysis, and low-level programming" # it will display as the subtitle
 
@@ -204,10 +204,17 @@ defaults:
       permalink: /:title/
       lang: en
   - scope:
+      path: "_tabs/es"
+      type: tabs
+    values:
+      layout: page
+      lang: es
+  - scope:
       path: "es"
     values:
       layout: page
       lang: es
+      permalink: /es/:title/
 
 sass:
   style: compressed
@@ -269,11 +276,11 @@ author:
 # Multi-language support
 languages:
   en:
-    title: "sk4rz Blog - Security & Development"
+    title: "sk4rz Blog"
     tagline: "Technical blog focused on cybersecurity, malware analysis, and low-level programming"
     description: "Technical blog focused on cybersecurity, malware analysis, and low-level programming by Oscar (sk4rz)"
   es:
-    title: "Blog de sk4rz - Seguridad y Desarrollo"
+    title: "Blog de sk4rz"
     tagline: "Blog técnico enfocado en ciberseguridad, análisis de malware y programación de bajo nivel"
     description: "Blog técnico enfocado en ciberseguridad, análisis de malware y programación de bajo nivel por Oscar (sk4rz)"
 
