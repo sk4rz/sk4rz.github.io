@@ -1,4 +1,4 @@
-<!-- CLEAN LANGUAGE SYSTEM --><!-- ULTIMATE NUCLEAR SOLUTION --><!-- FORCE REMOVE DUPLICATES - AGGRESSIVE SOLUTION --><!-- Clean Language System --><!-- Simple Language System --><!-- Simple Language System --><!-- Enhanced Language System -->
+<!-- PRESERVE ORIGINAL CHIRPY DESIGN - ONLY FILTER CONTENT --><!-- CLEAN LANGUAGE SYSTEM --><!-- ULTIMATE NUCLEAR SOLUTION --><!-- FORCE REMOVE DUPLICATES - AGGRESSIVE SOLUTION --><!-- Clean Language System --><!-- Simple Language System --><!-- Simple Language System --><!-- Enhanced Language System -->
 
 <script>
 
@@ -6,107 +6,215 @@ function getCurrentLanguage() {<script>
 
   var path = window.location.pathname;
 
-  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';console.log('🚀 NUCLEAR LANGUAGE SYSTEM ACTIVATED');<script>
+  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';function getCurrentLanguage() {<script>
 
 }
 
-
+  var path = window.location.pathname;
 
 function switchToLanguage(targetLang) {
 
-  var currentPath = window.location.pathname;function getCurrentLanguage() {function getCurrentLanguage() {<script>
+  var currentPath = window.location.pathname;  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';console.log('🚀 NUCLEAR LANGUAGE SYSTEM ACTIVATED');<script>
 
   var newPath;
 
-    var path = window.location.pathname;
+  }
 
   if (targetLang === 'es') {
 
-    if (currentPath.includes('/es/')) return;  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';  var path = window.location.pathname;
+    if (currentPath.includes('/es/')) return;
 
     
 
-    if (currentPath === '/' || currentPath === '/index.html') {}
+    if (currentPath === '/' || currentPath === '/index.html') {function switchToLanguage(targetLang) {
 
       newPath = '/es/';
 
-    } else if (currentPath.includes('/about')) {  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';function getCurrentLanguage() {<script>
+    } else if (currentPath.includes('/about')) {  var currentPath = window.location.pathname;function getCurrentLanguage() {function getCurrentLanguage() {<script>
 
       newPath = '/es/about/';
 
-    } else if (currentPath.includes('/categories')) {function switchToLanguage(targetLang) {
+    } else if (currentPath.includes('/categories')) {  var newPath;
 
       newPath = '/es/categories/';
 
-    } else if (currentPath.includes('/tags')) {  var currentPath = window.location.pathname;}
+    } else if (currentPath.includes('/tags')) {    var path = window.location.pathname;
 
       newPath = '/es/tags/';
 
-    } else if (currentPath.includes('/archives')) {  var newPath;
+    } else if (currentPath.includes('/archives')) {  if (targetLang === 'es') {
 
       newPath = '/es/archives/';
 
-    } else {    var path = window.location.pathname;
+    } else {    if (currentPath.includes('/es/')) return;  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';  var path = window.location.pathname;
 
       newPath = '/es/';
 
-    }  if (targetLang === 'es') {
+    }    
 
   } else {
 
-    if (!currentPath.includes('/es/')) return;    if (currentPath.includes('/es/')) return;function switchToLanguage(targetLang) {
+    if (!currentPath.includes('/es/')) return;    if (currentPath === '/' || currentPath === '/index.html') {}
 
     newPath = currentPath.replace('/es', '') || '/';
 
-  }    
+  }      newPath = '/es/';
 
   
 
-  window.location.href = newPath;    if (currentPath === '/' || currentPath === '/index.html') {  var currentPath = window.location.pathname;  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';// Simple and robust language system<script><script>
-
-}
-
-      newPath = '/es/';
-
-function switchToSpanish() {
-
-  switchToLanguage('es');    } else if (currentPath.includes('/about')) {  var newPath;
+  window.location.href = newPath;    } else if (currentPath.includes('/about')) {  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';function getCurrentLanguage() {<script>
 
 }
 
       newPath = '/es/about/';
 
-function switchToEnglish() {
+function switchToSpanish() {
 
-  switchToLanguage('en');    } else if (currentPath.includes('/categories')) {  }
+  switchToLanguage('es');    } else if (currentPath.includes('/categories')) {function switchToLanguage(targetLang) {
 
 }
 
-</script>      newPath = '/es/categories/';
+      newPath = '/es/categories/';
 
-    } else if (currentPath.includes('/tags')) {  if (targetLang === 'es') {
+function switchToEnglish() {  
+
+  switchToLanguage('en');    } else if (currentPath.includes('/tags')) {  var currentPath = window.location.pathname;}
+
+}
 
       newPath = '/es/tags/';
 
-    } else if (currentPath.includes('/archives')) {    if (currentPath.includes('/es/')) return;function getCurrentLanguage() {
+// Filter sidebar duplicates AFTER Chirpy theme loads - preserve original design
 
-      newPath = '/es/archives/';
+function filterSidebarDuplicates() {    } else if (currentPath.includes('/archives')) {  var newPath;
 
-    } else {    
+  var currentLang = getCurrentLanguage();
 
-      newPath = '/es/';
+        newPath = '/es/archives/';
 
-    }    if (currentPath === '/' || currentPath === '/index.html') {function switchToLanguage(targetLang) {
+  // Find navigation links using Chirpy's selectors
 
-  } else {
-
-    if (!currentPath.includes('/es/')) return;      newPath = '/es/';
-
-    newPath = currentPath.replace('/es', '') || '/';
-
-  }    } else if (currentPath.includes('/about')) {  var currentPath = window.location.pathname;  var path = window.location.pathname;// Simple and robust language system  // Language persistence and detection system
+  var navLinks = document.querySelectorAll('#sidebar .nav-link, #sidebar nav a, .sidebar-nav a');    } else {    var path = window.location.pathname;
 
   
+
+  var englishTabs = ['Home', 'Categories', 'Tags', 'Archives', 'About'];      newPath = '/es/';
+
+  var spanishTabs = ['Inicio', 'Categorías', 'Etiquetas', 'Archivo', 'Acerca de'];
+
+      }  if (targetLang === 'es') {
+
+  navLinks.forEach(function(link) {
+
+    var text = link.textContent.trim();  } else {
+
+    var shouldHide = false;
+
+        if (!currentPath.includes('/es/')) return;    if (currentPath.includes('/es/')) return;function switchToLanguage(targetLang) {
+
+    if (currentLang === 'es') {
+
+      shouldHide = englishTabs.includes(text);    newPath = currentPath.replace('/es', '') || '/';
+
+    } else {
+
+      shouldHide = spanishTabs.includes(text);  }    
+
+    }
+
+      
+
+    if (shouldHide) {
+
+      // Hide parent li to preserve original spacing and animations  window.location.href = newPath;    if (currentPath === '/' || currentPath === '/index.html') {  var currentPath = window.location.pathname;  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';// Simple and robust language system<script><script>
+
+      var parentLi = link.closest('li') || link.parentElement;
+
+      if (parentLi && parentLi.tagName === 'LI') {}
+
+        parentLi.style.display = 'none';
+
+      } else {      newPath = '/es/';
+
+        link.style.display = 'none';
+
+      }function switchToSpanish() {
+
+    }
+
+  });  switchToLanguage('es');    } else if (currentPath.includes('/about')) {  var newPath;
+
+}
+
+}
+
+// Initialize after Chirpy loads
+
+document.addEventListener('DOMContentLoaded', function() {      newPath = '/es/about/';
+
+  // Multiple attempts to catch theme loading
+
+  setTimeout(filterSidebarDuplicates, 100);function switchToEnglish() {
+
+  setTimeout(filterSidebarDuplicates, 300);
+
+  setTimeout(filterSidebarDuplicates, 500);  switchToLanguage('en');    } else if (currentPath.includes('/categories')) {  }
+
+  setTimeout(filterSidebarDuplicates, 1000);
+
+  }
+
+  // Watch for dynamic content
+
+  if (window.MutationObserver) {</script>      newPath = '/es/categories/';
+
+    var observer = new MutationObserver(function(mutations) {
+
+      var shouldFilter = false;    } else if (currentPath.includes('/tags')) {  if (targetLang === 'es') {
+
+      mutations.forEach(function(mutation) {
+
+        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {      newPath = '/es/tags/';
+
+          shouldFilter = true;
+
+        }    } else if (currentPath.includes('/archives')) {    if (currentPath.includes('/es/')) return;function getCurrentLanguage() {
+
+      });
+
+            newPath = '/es/archives/';
+
+      if (shouldFilter) {
+
+        setTimeout(filterSidebarDuplicates, 50);    } else {    
+
+      }
+
+    });      newPath = '/es/';
+
+    
+
+    setTimeout(function() {    }    if (currentPath === '/' || currentPath === '/index.html') {function switchToLanguage(targetLang) {
+
+      if (document.getElementById('sidebar')) {
+
+        observer.observe(document.getElementById('sidebar'), {   } else {
+
+          childList: true, 
+
+          subtree: true     if (!currentPath.includes('/es/')) return;      newPath = '/es/';
+
+        });
+
+      }    newPath = currentPath.replace('/es', '') || '/';
+
+    }, 200);
+
+  }  }    } else if (currentPath.includes('/about')) {  var currentPath = window.location.pathname;  var path = window.location.pathname;// Simple and robust language system  // Language persistence and detection system
+
+});
+
+</script>  
 
   window.location.href = newPath;      newPath = '/es/about/';
 
