@@ -40,4 +40,4 @@ title: "About"
 
 ---
 
-{% include post-language-toggle.html spanish_url="/es/about/" %}
+{% include post-language-toggle.html %}

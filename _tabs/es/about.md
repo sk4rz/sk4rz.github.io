@@ -41,4 +41,4 @@ permalink: /es/about/
 
 ---
 
-{% include post-language-toggle.html english_url="/about/" %}
+{% include post-language-toggle.html %}

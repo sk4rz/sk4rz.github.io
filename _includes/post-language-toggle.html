@@ -1,56 +1,56 @@
 <!-- Post language toggle -->
-{% assign current_lang = page.lang | default: site.lang | default: 'en' %}
-{% assign post_slug = page.slug | default: page.title | slugify %}
+{% assign current_lang = page.lang | default: site.lang | default: 'en' %} {%
+assign post_slug = page.slug | default: page.title | slugify %}
 
 <div class="post-language-toggle mt-4 p-3 border rounded">
   {% if current_lang == 'es' %}
-    <div class="d-flex align-items-center">
-      <i class="fas fa-globe me-2"></i>
-      <span class="me-2">¿Prefieres leer en inglés?</span>
-      {% if include.english_url %}
-        <a href="{{ include.english_url }}" class="btn btn-outline-primary btn-sm">
-          <i class="fas fa-language me-1"></i>
-          Read in English
-        </a>
-      {% else %}
-        <button class="btn btn-outline-primary btn-sm language-toggle">
-          <i class="fas fa-language me-1"></i>
-          Read in English
-        </button>
-      {% endif %}
-    </div>
+  <div class="d-flex align-items-center">
+    <i class="fas fa-globe me-2"></i>
+    <span class="me-2">¿Prefieres leer en inglés?</span>
+    {% if include.english_url %}
+    <a href="{{ include.english_url }}" class="btn btn-outline-primary btn-sm">
+      <i class="fas fa-language me-1"></i>
+      Read in English
+    </a>
+    {% else %}
+    <button class="btn btn-outline-primary btn-sm language-toggle">
+      <i class="fas fa-language me-1"></i>
+      Read in English
+    </button>
+    {% endif %}
+  </div>
   {% else %}
-    <div class="d-flex align-items-center">
-      <i class="fas fa-globe me-2"></i>
-      <span class="me-2">¿Te gustaría leer en español?</span>
-      {% if include.spanish_url %}
-        <a href="{{ include.spanish_url }}" class="btn btn-outline-primary btn-sm">
-          <i class="fas fa-language me-1"></i>
-          Leer en Español
-        </a>
-      {% else %}
-        <button class="btn btn-outline-primary btn-sm language-toggle">
-          <i class="fas fa-language me-1"></i>
-          Leer en Español
-        </button>
-      {% endif %}
-    </div>
+  <div class="d-flex align-items-center">
+    <i class="fas fa-globe me-2"></i>
+    <span class="me-2">¿Te gustaría leer en español?</span>
+    {% if include.spanish_url %}
+    <a href="{{ include.spanish_url }}" class="btn btn-outline-primary btn-sm">
+      <i class="fas fa-language me-1"></i>
+      Leer en Español
+    </a>
+    {% else %}
+    <button class="btn btn-outline-primary btn-sm language-toggle">
+      <i class="fas fa-language me-1"></i>
+      Leer en Español
+    </button>
+    {% endif %}
+  </div>
   {% endif %}
 </div>
 
 <style>
-.post-language-toggle {
-  background: var(--card-bg);
-  border-color: var(--main-border-color) !important;
-}
+  .post-language-toggle {
+    background: var(--card-bg);
+    border-color: var(--main-border-color) !important;
+  }
 
-.post-language-toggle .btn-outline-primary {
-  border-color: var(--link-color);
-  color: var(--link-color);
-}
+  .post-language-toggle .btn-outline-primary {
+    border-color: var(--link-color);
+    color: var(--link-color);
+  }
 
-.post-language-toggle .btn-outline-primary:hover {
-  background-color: var(--link-color);
-  border-color: var(--link-color);
-}
+  .post-language-toggle .btn-outline-primary:hover {
+    background-color: var(--link-color);
+    border-color: var(--link-color);
+  }
 </style>

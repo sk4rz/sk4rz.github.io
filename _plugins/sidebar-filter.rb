@@ -1,5 +1,6 @@
 Jekyll::Hooks.register :site, :post_read do |site|
-  # Set default language for all tabs and remove language-specific duplicates
+  # Set default language for all tabs but DON'T filter them during build
+  # We need all pages to be generated, filtering happens in the browser
   return unless site.collections['tabs']
   
   # Set default language
@@ -7,16 +8,8 @@ Jekyll::Hooks.register :site, :post_read do |site|
     tab.data['lang'] ||= 'en'
   end
   
-  # Get the current language from site config
-  current_lang = site.config['lang'] || 'en'
-  
-  # Filter out tabs that don't match the current language
-  filtered_docs = site.collections['tabs'].docs.select do |tab|
-    (tab.data['lang'] || 'en') == current_lang
-  end
-  
-  # Replace the docs array
-  site.collections['tabs'].docs.replace(filtered_docs)
+  # NOTE: We don't filter here anymore - all pages need to be generated
+  # The JavaScript handles the filtering in the browser
 end
 
 # Add JavaScript to filter sidebar after page load
