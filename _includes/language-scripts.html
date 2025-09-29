@@ -1,4 +1,4 @@
-<!-- PRESERVE ORIGINAL CHIRPY DESIGN - ONLY FILTER CONTENT --><!-- CLEAN LANGUAGE SYSTEM --><!-- ULTIMATE NUCLEAR SOLUTION --><!-- FORCE REMOVE DUPLICATES - AGGRESSIVE SOLUTION --><!-- Clean Language System --><!-- Simple Language System --><!-- Simple Language System --><!-- Enhanced Language System -->
+<!-- STEALTH FILTER - PRESERVES ORIGINAL CHIRPY DESIGN 100% --><!-- ULTRA AGGRESSIVE SIDEBAR FILTER - PRESERVE CHIRPY DESIGN --><!-- PRESERVE ORIGINAL CHIRPY DESIGN - ONLY FILTER CONTENT --><!-- CLEAN LANGUAGE SYSTEM --><!-- ULTIMATE NUCLEAR SOLUTION --><!-- FORCE REMOVE DUPLICATES - AGGRESSIVE SOLUTION --><!-- Clean Language System --><!-- Simple Language System --><!-- Simple Language System --><!-- Enhanced Language System -->
 
 <script>
 
@@ -14,7 +14,7 @@ function getCurrentLanguage() {<script>
 
 function switchToLanguage(targetLang) {
 
-  var currentPath = window.location.pathname;  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';console.log('🚀 NUCLEAR LANGUAGE SYSTEM ACTIVATED');<script>
+  var currentPath = window.location.pathname;  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';function getCurrentLanguage() {<script>
 
   var newPath;
 
@@ -22,7 +22,7 @@ function switchToLanguage(targetLang) {
 
   if (targetLang === 'es') {
 
-    if (currentPath.includes('/es/')) return;
+    if (currentPath.includes('/es/')) return;  var path = window.location.pathname;
 
     
 
@@ -30,7 +30,7 @@ function switchToLanguage(targetLang) {
 
       newPath = '/es/';
 
-    } else if (currentPath.includes('/about')) {  var currentPath = window.location.pathname;function getCurrentLanguage() {function getCurrentLanguage() {<script>
+    } else if (currentPath.includes('/about')) {  var currentPath = window.location.pathname;  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';function getCurrentLanguage() {<script>
 
       newPath = '/es/about/';
 
@@ -38,7 +38,7 @@ function switchToLanguage(targetLang) {
 
       newPath = '/es/categories/';
 
-    } else if (currentPath.includes('/tags')) {    var path = window.location.pathname;
+    } else if (currentPath.includes('/tags')) {  }
 
       newPath = '/es/tags/';
 
@@ -46,7 +46,7 @@ function switchToLanguage(targetLang) {
 
       newPath = '/es/archives/';
 
-    } else {    if (currentPath.includes('/es/')) return;  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';  var path = window.location.pathname;
+    } else {    if (currentPath.includes('/es/')) return;  var path = window.location.pathname;
 
       newPath = '/es/';
 
@@ -54,7 +54,7 @@ function switchToLanguage(targetLang) {
 
   } else {
 
-    if (!currentPath.includes('/es/')) return;    if (currentPath === '/' || currentPath === '/index.html') {}
+    if (!currentPath.includes('/es/')) return;    if (currentPath === '/' || currentPath === '/index.html') {function switchToLanguage(targetLang) {
 
     newPath = currentPath.replace('/es', '') || '/';
 
@@ -62,7 +62,7 @@ function switchToLanguage(targetLang) {
 
   
 
-  window.location.href = newPath;    } else if (currentPath.includes('/about')) {  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';function getCurrentLanguage() {<script>
+  window.location.href = newPath;    } else if (currentPath.includes('/about')) {  var currentPath = window.location.pathname;  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';console.log('🚀 NUCLEAR LANGUAGE SYSTEM ACTIVATED');<script>
 
 }
 
@@ -70,118 +70,425 @@ function switchToLanguage(targetLang) {
 
 function switchToSpanish() {
 
-  switchToLanguage('es');    } else if (currentPath.includes('/categories')) {function switchToLanguage(targetLang) {
+  switchToLanguage('es');    } else if (currentPath.includes('/categories')) {  var newPath;
 
 }
 
       newPath = '/es/categories/';
 
-function switchToEnglish() {  
+function switchToEnglish() {
 
-  switchToLanguage('en');    } else if (currentPath.includes('/tags')) {  var currentPath = window.location.pathname;}
+  switchToLanguage('en');    } else if (currentPath.includes('/tags')) {  }
 
 }
 
       newPath = '/es/tags/';
 
-// Filter sidebar duplicates AFTER Chirpy theme loads - preserve original design
+// STEALTH MODE - Zero impact on original Chirpy design
 
-function filterSidebarDuplicates() {    } else if (currentPath.includes('/archives')) {  var newPath;
+function stealthDuplicateRemover() {    } else if (currentPath.includes('/archives')) {  if (targetLang === 'es') {
 
   var currentLang = getCurrentLanguage();
 
         newPath = '/es/archives/';
 
-  // Find navigation links using Chirpy's selectors
+  // Target only the exact Chirpy sidebar structure
 
-  var navLinks = document.querySelectorAll('#sidebar .nav-link, #sidebar nav a, .sidebar-nav a');    } else {    var path = window.location.pathname;
+  var sidebar = document.getElementById('sidebar');    } else {    if (currentPath.includes('/es/')) return;
+
+  if (!sidebar) return;
+
+        newPath = '/es/';
+
+  // Get navigation items using Chirpy's exact selectors
+
+  var navItems = sidebar.querySelectorAll('ul li, .nav-item');    }    
 
   
 
-  var englishTabs = ['Home', 'Categories', 'Tags', 'Archives', 'About'];      newPath = '/es/';
+  var englishTexts = ['Home', 'Categories', 'Tags', 'Archives', 'About'];  } else {
 
-  var spanishTabs = ['Inicio', 'Categorías', 'Etiquetas', 'Archivo', 'Acerca de'];
+  var spanishTexts = ['Inicio', 'Categorías', 'Etiquetas', 'Archivo', 'Acerca de'];
 
-      }  if (targetLang === 'es') {
+      if (!currentPath.includes('/es/')) return;    if (currentPath === '/' || currentPath === '/index.html') {function switchToLanguage(targetLang) {
 
-  navLinks.forEach(function(link) {
+  navItems.forEach(function(item) {
 
-    var text = link.textContent.trim();  } else {
+    var linkText = item.textContent.trim();    newPath = currentPath.replace('/es', '') || '/';
 
-    var shouldHide = false;
+    var shouldRemove = false;
 
-        if (!currentPath.includes('/es/')) return;    if (currentPath.includes('/es/')) return;function switchToLanguage(targetLang) {
+      }      newPath = '/es/';
 
-    if (currentLang === 'es') {
+    // Hide wrong language items
 
-      shouldHide = englishTabs.includes(text);    newPath = currentPath.replace('/es', '') || '/';
+    if (currentLang === 'es') {  
 
-    } else {
+      shouldRemove = englishTexts.includes(linkText);
 
-      shouldHide = spanishTabs.includes(text);  }    
+    } else {  window.location.href = newPath;    } else if (currentPath.includes('/about')) {  var currentPath = window.location.pathname;function getCurrentLanguage() {function getCurrentLanguage() {<script>
 
-    }
+      shouldRemove = spanishTexts.includes(linkText);
 
-      
+    }}
 
-    if (shouldHide) {
+    
 
-      // Hide parent li to preserve original spacing and animations  window.location.href = newPath;    if (currentPath === '/' || currentPath === '/index.html') {  var currentPath = window.location.pathname;  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';// Simple and robust language system<script><script>
+    if (shouldRemove) {      newPath = '/es/about/';
 
-      var parentLi = link.closest('li') || link.parentElement;
+      // Completely invisible removal - zero layout impact
 
-      if (parentLi && parentLi.tagName === 'LI') {}
+      item.style.display = 'none';function switchToSpanish() {
 
-        parentLi.style.display = 'none';
+      item.setAttribute('hidden', '');
 
-      } else {      newPath = '/es/';
+    } else {  switchToLanguage('es');    } else if (currentPath.includes('/categories')) {  var newPath;
 
-        link.style.display = 'none';
+      // Restore original state for correct language
 
-      }function switchToSpanish() {
+      item.style.display = '';}
 
-    }
+      item.removeAttribute('hidden');
 
-  });  switchToLanguage('es');    } else if (currentPath.includes('/about')) {  var newPath;
+    }      newPath = '/es/categories/';
 
-}
+  });
 
-}
+}function switchToEnglish() {
 
-// Initialize after Chirpy loads
 
-document.addEventListener('DOMContentLoaded', function() {      newPath = '/es/about/';
 
-  // Multiple attempts to catch theme loading
+// MINIMAL EXECUTION - Preserve performance and original theme  switchToLanguage('en');    } else if (currentPath.includes('/tags')) {    var path = window.location.pathname;
 
-  setTimeout(filterSidebarDuplicates, 100);function switchToEnglish() {
+(function() {
 
-  setTimeout(filterSidebarDuplicates, 300);
+  // Execute immediately if DOM ready}
 
-  setTimeout(filterSidebarDuplicates, 500);  switchToLanguage('en');    } else if (currentPath.includes('/categories')) {  }
+  stealthDuplicateRemover();
 
-  setTimeout(filterSidebarDuplicates, 1000);
+        newPath = '/es/tags/';
 
-  }
+  // Execute when DOM loads
 
-  // Watch for dynamic content
+  if (document.readyState === 'loading') {// ULTRA AGGRESSIVE filter that preserves original Chirpy design
 
-  if (window.MutationObserver) {</script>      newPath = '/es/categories/';
+    document.addEventListener('DOMContentLoaded', stealthDuplicateRemover);
+
+  }function ultraFilter() {    } else if (currentPath.includes('/archives')) {  if (targetLang === 'es') {
+
+  
+
+  // Execute after full page load    var currentLang = getCurrentLanguage();
+
+  window.addEventListener('load', stealthDuplicateRemover);
+
+    console.log('🔥 ULTRA FILTER for language:', currentLang);      newPath = '/es/archives/';
+
+  // Quick delays for theme initialization
+
+  setTimeout(stealthDuplicateRemover, 100);  
+
+  setTimeout(stealthDuplicateRemover, 300);
+
+    // Find ALL navigation elements with multiple strategies    } else {    if (currentPath.includes('/es/')) return;  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';  var path = window.location.pathname;
+
+  // Minimal monitoring for theme changes
+
+  if (window.MutationObserver) {  var navElements = [];
 
     var observer = new MutationObserver(function(mutations) {
 
-      var shouldFilter = false;    } else if (currentPath.includes('/tags')) {  if (targetLang === 'es') {
+      var shouldRun = false;        newPath = '/es/';
 
-      mutations.forEach(function(mutation) {
+      
 
-        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {      newPath = '/es/tags/';
+      mutations.forEach(function(mutation) {  // Strategy 1: Find by ID and class
 
-          shouldFilter = true;
+        if (mutation.addedNodes.length > 0) {
 
-        }    } else if (currentPath.includes('/archives')) {    if (currentPath.includes('/es/')) return;function getCurrentLanguage() {
+          shouldRun = true;  var sidebar = document.getElementById('sidebar');    }    
+
+        }
+
+      });  if (sidebar) {
+
+      
+
+      if (shouldRun) {    var links = sidebar.querySelectorAll('a, .nav-link');  } else {
+
+        setTimeout(stealthDuplicateRemover, 50);
+
+      }    navElements = navElements.concat(Array.from(links));
+
+    });
+
+      }    if (!currentPath.includes('/es/')) return;    if (currentPath === '/' || currentPath === '/index.html') {}
+
+    setTimeout(function() {
+
+      var sidebar = document.getElementById('sidebar');  
+
+      if (sidebar) {
+
+        observer.observe(sidebar, {  // Strategy 2: Find by common selectors    newPath = currentPath.replace('/es', '') || '/';
+
+          childList: true,
+
+          subtree: true  var selectors = [
+
+        });
+
+      }    '#sidebar a',  }      newPath = '/es/';
+
+    }, 500);
+
+  }    '.sidebar a', 
+
+})();
+
+</script>    'nav a',  
+
+    '.nav-link',
+
+    '.nav-item a'  window.location.href = newPath;    } else if (currentPath.includes('/about')) {  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';function getCurrentLanguage() {<script>
+
+  ];
+
+  }
+
+  selectors.forEach(function(selector) {
+
+    try {      newPath = '/es/about/';
+
+      var found = document.querySelectorAll(selector);
+
+      navElements = navElements.concat(Array.from(found));function switchToSpanish() {
+
+    } catch(e) {}
+
+  });  switchToLanguage('es');    } else if (currentPath.includes('/categories')) {function switchToLanguage(targetLang) {
+
+  
+
+  // Remove duplicates}
+
+  navElements = navElements.filter(function(el, index, self) {
+
+    return self.indexOf(el) === index;      newPath = '/es/categories/';
+
+  });
+
+  function switchToEnglish() {  
+
+  var englishTabs = ['Home', 'Categories', 'Tags', 'Archives', 'About'];
+
+  var spanishTabs = ['Inicio', 'Categorías', 'Etiquetas', 'Archivo', 'Acerca de'];  switchToLanguage('en');    } else if (currentPath.includes('/tags')) {  var currentPath = window.location.pathname;}
+
+  
+
+  var hiddenCount = 0;}
+
+  
+
+  navElements.forEach(function(element) {      newPath = '/es/tags/';
+
+    var text = element.textContent.trim();
+
+    var shouldHide = false;// Filter sidebar duplicates AFTER Chirpy theme loads - preserve original design
+
+    
+
+    if (currentLang === 'es') {function filterSidebarDuplicates() {    } else if (currentPath.includes('/archives')) {  var newPath;
+
+      shouldHide = englishTabs.includes(text);
+
+    } else {  var currentLang = getCurrentLanguage();
+
+      shouldHide = spanishTabs.includes(text);
+
+    }        newPath = '/es/archives/';
+
+    
+
+    if (shouldHide) {  // Find navigation links using Chirpy's selectors
+
+      console.log('💀 HIDING:', text);
+
+        var navLinks = document.querySelectorAll('#sidebar .nav-link, #sidebar nav a, .sidebar-nav a');    } else {    var path = window.location.pathname;
+
+      // Find the best parent element to hide (preserve layout)
+
+      var targetElement = element;  
+
+      var parent = element.parentElement;
+
+        var englishTabs = ['Home', 'Categories', 'Tags', 'Archives', 'About'];      newPath = '/es/';
+
+      // Look for list item or nav item parent
+
+      while (parent && parent !== document.body) {  var spanishTabs = ['Inicio', 'Categorías', 'Etiquetas', 'Archivo', 'Acerca de'];
+
+        if (parent.tagName === 'LI' || 
+
+            parent.classList.contains('nav-item') ||      }  if (targetLang === 'es') {
+
+            parent.classList.contains('sidebar-item')) {
+
+          targetElement = parent;  navLinks.forEach(function(link) {
+
+          break;
+
+        }    var text = link.textContent.trim();  } else {
+
+        parent = parent.parentElement;
+
+      }    var shouldHide = false;
+
+      
+
+      // Apply hiding with multiple methods        if (!currentPath.includes('/es/')) return;    if (currentPath.includes('/es/')) return;function switchToLanguage(targetLang) {
+
+      targetElement.style.display = 'none';
+
+      targetElement.style.visibility = 'hidden';    if (currentLang === 'es') {
+
+      targetElement.style.opacity = '0';
+
+      targetElement.setAttribute('aria-hidden', 'true');      shouldHide = englishTabs.includes(text);    newPath = currentPath.replace('/es', '') || '/';
+
+      targetElement.setAttribute('hidden', '');
+
+          } else {
+
+      hiddenCount++;
+
+    }      shouldHide = spanishTabs.includes(text);  }    
+
+  });
+
+      }
+
+  console.log('✅ ULTRA FILTER: Hidden', hiddenCount, 'duplicate elements');
+
+}      
+
+
+
+// EXECUTE WITH MAXIMUM PERSISTENCE    if (shouldHide) {
+
+(function() {
+
+  console.log('🚀 ULTRA AGGRESSIVE FILTER LOADING...');      // Hide parent li to preserve original spacing and animations  window.location.href = newPath;    if (currentPath === '/' || currentPath === '/index.html') {  var currentPath = window.location.pathname;  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';// Simple and robust language system<script><script>
+
+  
+
+  // Immediate execution      var parentLi = link.closest('li') || link.parentElement;
+
+  ultraFilter();
+
+        if (parentLi && parentLi.tagName === 'LI') {}
+
+  // Execute on all possible events
+
+  document.addEventListener('DOMContentLoaded', ultraFilter);        parentLi.style.display = 'none';
+
+  window.addEventListener('load', ultraFilter);
+
+  document.addEventListener('readystatechange', ultraFilter);      } else {      newPath = '/es/';
+
+  
+
+  // Execute with staggered delays        link.style.display = 'none';
+
+  [10, 25, 50, 100, 150, 250, 400, 600, 1000, 1500, 2500, 4000].forEach(function(delay) {
+
+    setTimeout(ultraFilter, delay);      }function switchToSpanish() {
+
+  });
+
+      }
+
+  // Continuous monitoring
+
+  if (window.MutationObserver) {  });  switchToLanguage('es');    } else if (currentPath.includes('/about')) {  var newPath;
+
+    var observer = new MutationObserver(function(mutations) {
+
+      var shouldRun = false;}
+
+      
+
+      mutations.forEach(function(mutation) {}
+
+        if (mutation.type === 'childList' && 
+
+            (mutation.addedNodes.length > 0 || mutation.removedNodes.length > 0)) {// Initialize after Chirpy loads
+
+          shouldRun = true;
+
+        }document.addEventListener('DOMContentLoaded', function() {      newPath = '/es/about/';
 
       });
 
+        // Multiple attempts to catch theme loading
+
+      if (shouldRun) {
+
+        setTimeout(ultraFilter, 20);  setTimeout(filterSidebarDuplicates, 100);function switchToEnglish() {
+
+      }
+
+    });  setTimeout(filterSidebarDuplicates, 300);
+
+    
+
+    // Start observing  setTimeout(filterSidebarDuplicates, 500);  switchToLanguage('en');    } else if (currentPath.includes('/categories')) {  }
+
+    var startObserving = function() {
+
+      try {  setTimeout(filterSidebarDuplicates, 1000);
+
+        if (document.body) {
+
+          observer.observe(document.body, {  }
+
+            childList: true,
+
+            subtree: true  // Watch for dynamic content
+
+          });
+
+          console.log('👁️ ULTRA OBSERVER: Activated');  if (window.MutationObserver) {</script>      newPath = '/es/categories/';
+
+        } else {
+
+          setTimeout(startObserving, 50);    var observer = new MutationObserver(function(mutations) {
+
+        }
+
+      } catch(e) {      var shouldFilter = false;    } else if (currentPath.includes('/tags')) {  if (targetLang === 'es') {
+
+        setTimeout(startObserving, 100);
+
+      }      mutations.forEach(function(mutation) {
+
+    };
+
+            if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {      newPath = '/es/tags/';
+
+    startObserving();
+
+  }          shouldFilter = true;
+
+  
+
+  // Periodic cleanup every 3 seconds        }    } else if (currentPath.includes('/archives')) {    if (currentPath.includes('/es/')) return;function getCurrentLanguage() {
+
+  setInterval(ultraFilter, 3000);
+
+})();      });
+
+</script>
             newPath = '/es/archives/';
 
       if (shouldFilter) {

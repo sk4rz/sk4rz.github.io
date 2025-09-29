@@ -108,32 +108,32 @@
 </style>
 
 <script>
-function switchLanguage(targetLang) {
-  var currentPath = window.location.pathname;
-  var newPath;
-  
-  if (targetLang === 'es') {
-    if (currentPath.includes('/es/')) return;
-    
-    if (currentPath === '/' || currentPath === '/index.html') {
-      newPath = '/es/';
-    } else if (currentPath.includes('/about')) {
-      newPath = '/es/about/';
-    } else if (currentPath.includes('/categories')) {
-      newPath = '/es/categories/';
-    } else if (currentPath.includes('/tags')) {
-      newPath = '/es/tags/';
-    } else if (currentPath.includes('/archives')) {
-      newPath = '/es/archives/';
+  function switchLanguage(targetLang) {
+    var currentPath = window.location.pathname;
+    var newPath;
+
+    if (targetLang === "es") {
+      if (currentPath.includes("/es/")) return;
+
+      if (currentPath === "/" || currentPath === "/index.html") {
+        newPath = "/es/";
+      } else if (currentPath.includes("/about")) {
+        newPath = "/es/about/";
+      } else if (currentPath.includes("/categories")) {
+        newPath = "/es/categories/";
+      } else if (currentPath.includes("/tags")) {
+        newPath = "/es/tags/";
+      } else if (currentPath.includes("/archives")) {
+        newPath = "/es/archives/";
+      } else {
+        newPath = "/es/";
+      }
     } else {
-      newPath = '/es/';
+      if (!currentPath.includes("/es/")) return;
+
+      newPath = currentPath.replace("/es", "") || "/";
     }
-  } else {
-    if (!currentPath.includes('/es/')) return;
-    
-    newPath = currentPath.replace('/es', '') || '/';
+
+    window.location.href = newPath;
   }
-  
-  window.location.href = newPath;
-}
 </script>
