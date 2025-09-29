@@ -29,11 +29,11 @@ class LanguageSwitcher {
 
   handleLanguageSwitch(e) {
     e.preventDefault();
-    
+
     const link = e.currentTarget;
     const href = link.getAttribute('href');
     const currentPath = window.location.pathname;
-    
+
     let newUrl;
     if (href.includes('/es/')) {
       // Switching to Spanish
@@ -49,15 +49,16 @@ class LanguageSwitcher {
       newUrl = `${window.location.origin}${cleanPath || '/'}`;
       this.setLanguagePreference('en');
     }
-    
+
     // Add loading state
     this.showLoadingState();
-    
+
     // Navigate with smooth transition
     setTimeout(() => {
       window.location.href = newUrl;
     }, 200);
-  }  extractLanguageFromURL(url) {
+  }
+  extractLanguageFromURL(url) {
     const match = url.match(/\/([a-z]{2})\//);
     return match ? match[1] : 'en';
   }

@@ -13,18 +13,20 @@
     </button>
     <ul class="dropdown-menu" aria-labelledby="languageDropdown">
       {% if current_lang != 'en' %}
-        <li>
-          <a class="dropdown-item" href="{{ page.url | replace: '/es', '' | relative_url }}">
-            🇺🇸 English
-          </a>
-        </li>
-      {% endif %}
-      {% if current_lang != 'es' %}
-        <li>
-          <a class="dropdown-item" href="/es{{ page.url | relative_url }}">
-            🇪🇸 Español
-          </a>
-        </li>
+      <li>
+        <a
+          class="dropdown-item"
+          href="{{ page.url | replace: '/es', '' | relative_url }}"
+        >
+          🇺🇸 English
+        </a>
+      </li>
+      {% endif %} {% if current_lang != 'es' %}
+      <li>
+        <a class="dropdown-item" href="/es{{ page.url | relative_url }}">
+          🇪🇸 Español
+        </a>
+      </li>
       {% endif %}
     </ul>
   </div>
