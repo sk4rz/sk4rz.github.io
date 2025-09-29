@@ -248,3 +248,5 @@ In real malware analysis, these techniques scale up to more complex scenarios in
 - **Python**: Automation and timing analysis
 
 Stay curious and keep analyzing! 🔍
+
+{% include post-language-toggle.html spanish_url="/posts/analisis-basico-malware/" %}

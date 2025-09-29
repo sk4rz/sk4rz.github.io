@@ -37,3 +37,7 @@ title: "About"
 {% for link in site.social.links %}
 - [{{ link | split: '//' | last | split: '/' | first | capitalize }}]({{ link }})
 {% endfor %}
+
+---
+
+{% include post-language-toggle.html spanish_url="/es/about/" %}

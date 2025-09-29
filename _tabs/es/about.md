@@ -38,3 +38,7 @@ permalink: /es/about/
 {% for link in site.social.links %}
 - [{{ link | split: '//' | last | split: '/' | first | capitalize }}]({{ link }})
 {% endfor %}
+
+---
+
+{% include post-language-toggle.html english_url="/about/" %}

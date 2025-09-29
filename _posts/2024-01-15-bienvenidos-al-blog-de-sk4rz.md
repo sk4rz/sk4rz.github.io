@@ -97,3 +97,5 @@ Recuerda: **La mejor manera de defenderse contra las amenazas es entender cómo 
 *Mantente curioso, mantente seguro.*
 
 **sk4rz**
+
+{% include post-language-toggle.html english_url="/posts/welcome-to-sk4rz-blog/" %}

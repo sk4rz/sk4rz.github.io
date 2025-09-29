@@ -1,72 +1,163 @@
-<!-- Language system scripts -->
-<script src="{{ '/assets/js/language-switcher.js' | relative_url }}"></script>
-
-<!-- Sidebar filtering script -->
+<!-- Enhanced Language System -->
 <script>
-function filterSidebar() {
-  // Get current page language
-  var currentLang = "en";
-  
-  // Check if we're on a Spanish page
-  if (window.location.pathname.includes("/es/")) {
-    currentLang = "es";
-  }
-  
-  // Find all sidebar navigation links - try multiple selectors
-  var possibleSelectors = [
-    '#sidebar .nav a',
-    '#sidebar nav a', 
-    '.sidebar .nav a',
-    '.sidebar nav a',
-    '[data-toggle="sidebar"] a',
-    '.nav-link'
-  ];
-  
-  var links = [];
-  possibleSelectors.forEach(function(selector) {
-    var found = document.querySelectorAll(selector);
-    if (found.length > 0) {
-      links = Array.from(found);
+// Language persistence and detection system
+var LanguageSystem = {
+  getCurrentLang: function() {
+    // 1. Check URL first
+    if (window.location.pathname.includes('/es/') || window.location.pathname === '/es') {
+      return 'es';
     }
-  });
+    
+    // 2. Check localStorage for user preference
+    var savedLang = localStorage.getItem('preferred_language');
+    if (savedLang && ['en', 'es'].includes(savedLang)) {
+      return savedLang;
+    }
+    
+    // 3. Default to English
+    return 'en';
+  },
   
-  // Debug: log what we found
-  console.log('Found ' + links.length + ' sidebar links');
+  setLanguage: function(lang) {
+    localStorage.setItem('preferred_language', lang);
+    this.updatePageForLanguage(lang);
+  },
   
-  // Hide tabs that don't match current language
-  links.forEach(function(link) {
-    var span = link.querySelector('span');
-    if (span) {
-      var text = span.textContent.trim();
-      console.log('Found tab: ' + text);
+  updatePageForLanguage: function(lang) {
+    // Update HTML lang attribute
+    document.documentElement.lang = lang;
+    
+    // Update body class for styling
+    document.body.classList.remove('lang-en', 'lang-es');
+    document.body.classList.add('lang-' + lang);
+    
+    // Filter sidebar
+    this.filterSidebar(lang);
+    
+    // Update language toggle links
+    this.updateLanguageToggles(lang);
+  },
+  
+  switchToLanguage: function(targetLang) {
+    var currentPath = window.location.pathname;
+    var newPath;
+    
+    if (targetLang === 'es') {
+      // Switch to Spanish
+      if (currentPath.startsWith('/es/')) {
+        return; // Already in Spanish
+      }
       
-      // Define duplicates to hide
-      var shouldHide = false;
-      
-      if (currentLang === 'en') {
-        // Hide Spanish tabs when on English pages
-        if (['Inicio', 'Categorías', 'Etiquetas', 'Archivo', 'Acerca de'].includes(text)) {
-          shouldHide = true;
-        }
+      // Map common pages
+      if (currentPath === '/' || currentPath === '/index.html') {
+        newPath = '/es/';
+      } else if (currentPath.includes('/categories')) {
+        newPath = '/es/categories/';
+      } else if (currentPath.includes('/tags')) {
+        newPath = '/es/tags/';
+      } else if (currentPath.includes('/archives')) {
+        newPath = '/es/archives/';
+      } else if (currentPath.includes('/about')) {
+        newPath = '/es/about/';
       } else {
-        // Hide English tabs when on Spanish pages  
-        if (['Home', 'Categories', 'Tags', 'Archives', 'About'].includes(text)) {
-          shouldHide = true;
-        }
+        newPath = '/es/';
+      }
+    } else {
+      // Switch to English
+      if (!currentPath.startsWith('/es/')) {
+        return; // Already in English
       }
       
-      if (shouldHide) {
-        link.style.display = 'none';
-        console.log('Hiding tab: ' + text);
-      }
+      // Remove /es prefix
+      newPath = currentPath.replace('/es', '') || '/';
     }
-  });
+    
+    this.setLanguage(targetLang);
+    window.location.href = newPath;
+  },
+
+  filterSidebar: function(currentLang) {
+
+    // Find all sidebar navigation links - try multiple selectors
+    var possibleSelectors = [
+      "#sidebar .nav a",
+      "#sidebar nav a",
+      ".sidebar .nav a",
+      ".sidebar nav a",
+      '[data-toggle="sidebar"] a',
+      ".nav-link",
+    ];
+
+    var links = [];
+    possibleSelectors.forEach(function (selector) {
+      var found = document.querySelectorAll(selector);
+      if (found.length > 0) {
+        links = Array.from(found);
+      }
+    });
+
+    // Debug: log what we found
+    console.log("Found " + links.length + " sidebar links");
+
+    // Hide tabs that don't match current language
+    links.forEach(function (link) {
+      var span = link.querySelector("span");
+      if (span) {
+        var text = span.textContent.trim();
+
+        // Define duplicates to hide
+        var shouldHide = false;
+
+        if (currentLang === "en") {
+          // Hide Spanish tabs when on English pages
+          if (["Inicio", "Categorías", "Etiquetas", "Archivo", "Acerca de"].includes(text)) {
+            shouldHide = true;
+          }
+        } else {
+          // Hide English tabs when on Spanish pages
+          if (["Home", "Categories", "Tags", "Archives", "About"].includes(text)) {
+            shouldHide = true;
+          }
+        }
+
+        if (shouldHide) {
+          link.style.display = "none";
+        }
+      }
+    });
+  },
+  
+  updateLanguageToggles: function(currentLang) {
+    // Update any language toggle elements
+    var toggles = document.querySelectorAll('.language-toggle');
+    toggles.forEach(function(toggle) {
+      if (currentLang === 'es') {
+        toggle.textContent = 'Read in English';
+        toggle.onclick = function() { LanguageSystem.switchToLanguage('en'); };
+      } else {
+        toggle.textContent = 'Leer en Español';
+        toggle.onclick = function() { LanguageSystem.switchToLanguage('es'); };
+      }
+    });
+  }
+};
+
+// Initialize system when page loads
+document.addEventListener("DOMContentLoaded", function () {
+  var currentLang = LanguageSystem.getCurrentLang();
+  LanguageSystem.updatePageForLanguage(currentLang);
+  
+  // Run filtering with delays to catch slow-loading elements
+  setTimeout(function() { LanguageSystem.filterSidebar(currentLang); }, 100);
+  setTimeout(function() { LanguageSystem.filterSidebar(currentLang); }, 1000);
+});
+
+// Global functions for easy access
+function switchToSpanish() {
+  LanguageSystem.switchToLanguage('es');
 }
 
-// Run the filter function
-document.addEventListener('DOMContentLoaded', function() {
-  setTimeout(filterSidebar, 100);
-  // Run again after a longer delay in case the sidebar loads slowly
-  setTimeout(filterSidebar, 1000);
-});
+function switchToEnglish() {
+  LanguageSystem.switchToLanguage('en');
+}
 </script>

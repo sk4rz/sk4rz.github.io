@@ -97,3 +97,5 @@ Let's explore the fascinating world of cybersecurity together!
 *Stay curious, stay secure.*
 
 **sk4rz**
+
+{% include post-language-toggle.html spanish_url="/posts/bienvenidos-al-blog-de-sk4rz/" %}

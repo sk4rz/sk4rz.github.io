@@ -16,14 +16,15 @@
       <li>
         <a
           class="dropdown-item"
-          href="{{ page.url | replace: '/es', '' | relative_url }}"
+          href="javascript:void(0)"
+          onclick="switchToEnglish()"
         >
           🇺🇸 English
         </a>
       </li>
       {% endif %} {% if current_lang != 'es' %}
       <li>
-        <a class="dropdown-item" href="/es{{ page.url | relative_url }}">
+        <a class="dropdown-item" href="javascript:void(0)" onclick="switchToSpanish()">
           🇪🇸 Español
         </a>
       </li>
