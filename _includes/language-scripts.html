@@ -1,123 +1,242 @@
-<!-- Enhanced Language System -->
-<script>
-  // Language persistence and detection system
-  var LanguageSystem = {
-    getCurrentLang: function () {
-      // 1. Check URL first
-      if (
+<!-- Simple Language System --><!-- Enhanced Language System -->
+
+<script><script>
+
+// Simple and robust language system  // Language persistence and detection system
+
+function getCurrentLanguage() {  var LanguageSystem = {
+
+  var path = window.location.pathname;    getCurrentLang: function () {
+
+  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';      // 1. Check URL first
+
+}      if (
+
         window.location.pathname.includes("/es/") ||
-        window.location.pathname === "/es"
-      ) {
-        return "es";
-      }
 
-      // 2. Check localStorage for user preference
-      var savedLang = localStorage.getItem("preferred_language");
-      if (savedLang && ["en", "es"].includes(savedLang)) {
-        return savedLang;
-      }
+function switchToLanguage(targetLang) {        window.location.pathname === "/es"
 
-      // 3. Default to English
-      return "en";
-    },
+  var currentPath = window.location.pathname;      ) {
 
-    setLanguage: function (lang) {
-      localStorage.setItem("preferred_language", lang);
-      this.updatePageForLanguage(lang);
-    },
+  var newPath;        return "es";
 
-    updatePageForLanguage: function (lang) {
-      // Update HTML lang attribute
-      document.documentElement.lang = lang;
-
-      // Update body class for styling
-      document.body.classList.remove("lang-en", "lang-es");
-      document.body.classList.add("lang-" + lang);
-
-      // Filter sidebar
-      this.filterSidebar(lang);
-
-      // Update language toggle links
-      this.updateLanguageToggles(lang);
-    },
-
-    switchToLanguage: function (targetLang) {
-      var currentPath = window.location.pathname;
-      var newPath;
-
-      if (targetLang === "es") {
-        // Switch to Spanish
-        if (currentPath.startsWith("/es/")) {
-          return; // Already in Spanish
         }
 
-        // Map common pages
-        if (currentPath === "/" || currentPath === "/index.html") {
-          newPath = "/es/";
-        } else if (currentPath.includes("/categories")) {
-          newPath = "/es/categories/";
-        } else if (currentPath.includes("/tags")) {
-          newPath = "/es/tags/";
-        } else if (currentPath.includes("/archives")) {
-          newPath = "/es/archives/";
-        } else if (currentPath.includes("/about")) {
-          newPath = "/es/about/";
-        } else {
-          newPath = "/es/";
-        }
-      } else {
-        // Switch to English
-        if (!currentPath.startsWith("/es/")) {
-          return; // Already in English
-        }
+  if (targetLang === 'es') {
 
-        // Remove /es prefix
-        newPath = currentPath.replace("/es", "") || "/";
-      }
+    if (currentPath.includes('/es/')) return; // Already in Spanish      // 2. Check localStorage for user preference
 
-      this.setLanguage(targetLang);
-      window.location.href = newPath;
-    },
+          var savedLang = localStorage.getItem("preferred_language");
 
-    filterSidebar: function (currentLang) {
-      // Find all sidebar navigation links - try multiple selectors
-      var possibleSelectors = [
-        "#sidebar .nav a",
+    // Map common pages to Spanish      if (savedLang && ["en", "es"].includes(savedLang)) {
+
+    if (currentPath === '/' || currentPath === '/index.html') {        return savedLang;
+
+      newPath = '/es/';      }
+
+    } else if (currentPath.includes('/about')) {
+
+      newPath = '/es/about/';      // 3. Default to English
+
+    } else if (currentPath.includes('/categories')) {      return "en";
+
+      newPath = '/es/categories/';    },
+
+    } else if (currentPath.includes('/tags')) {
+
+      newPath = '/es/tags/';    setLanguage: function (lang) {
+
+    } else if (currentPath.includes('/archives')) {      localStorage.setItem("preferred_language", lang);
+
+      newPath = '/es/archives/';      this.updatePageForLanguage(lang);
+
+    } else {    },
+
+      newPath = '/es/';
+
+    }    updatePageForLanguage: function (lang) {
+
+  } else {      // Update HTML lang attribute
+
+    if (!currentPath.includes('/es/')) return; // Already in English      document.documentElement.lang = lang;
+
+    
+
+    // Remove /es prefix      // Update body class for styling
+
+    newPath = currentPath.replace('/es', '') || '/';      document.body.classList.remove("lang-en", "lang-es");
+
+  }      document.body.classList.add("lang-" + lang);
+
+  
+
+  window.location.href = newPath;      // Filter sidebar
+
+}      this.filterSidebar(lang);
+
+
+
+function hideDuplicateTabs() {      // Update language toggle links
+
+  var currentLang = getCurrentLanguage();      this.updateLanguageToggles(lang);
+
+      },
+
+  // Find sidebar links
+
+  var selectors = [    switchToLanguage: function (targetLang) {
+
+    '#sidebar a',      var currentPath = window.location.pathname;
+
+    '.sidebar a',       var newPath;
+
+    'nav a',
+
+    '.nav-link'      if (targetLang === "es") {
+
+  ];        // Switch to Spanish
+
+          if (currentPath.startsWith("/es/")) {
+
+  var allLinks = [];          return; // Already in Spanish
+
+  selectors.forEach(function(selector) {        }
+
+    var found = document.querySelectorAll(selector);
+
+    if (found.length > 0) {        // Map common pages
+
+      allLinks = allLinks.concat(Array.from(found));        if (currentPath === "/" || currentPath === "/index.html") {
+
+    }          newPath = "/es/";
+
+  });        } else if (currentPath.includes("/categories")) {
+
+            newPath = "/es/categories/";
+
+  // Hide inappropriate language tabs        } else if (currentPath.includes("/tags")) {
+
+  allLinks.forEach(function(link) {          newPath = "/es/tags/";
+
+    var text = link.textContent.trim();        } else if (currentPath.includes("/archives")) {
+
+    var shouldHide = false;          newPath = "/es/archives/";
+
+            } else if (currentPath.includes("/about")) {
+
+    if (currentLang === 'en') {          newPath = "/es/about/";
+
+      // Hide Spanish tabs on English pages        } else {
+
+      var spanishTabs = ['Inicio', 'Categorías', 'Etiquetas', 'Archivo', 'Acerca de'];          newPath = "/es/";
+
+      shouldHide = spanishTabs.includes(text);        }
+
+    } else {      } else {
+
+      // Hide English tabs on Spanish pages        // Switch to English
+
+      var englishTabs = ['Home', 'Categories', 'Tags', 'Archives', 'About'];        if (!currentPath.startsWith("/es/")) {
+
+      shouldHide = englishTabs.includes(text);          return; // Already in English
+
+    }        }
+
+    
+
+    if (shouldHide) {        // Remove /es prefix
+
+      link.style.display = 'none';        newPath = currentPath.replace("/es", "") || "/";
+
+    } else {      }
+
+      link.style.display = '';
+
+    }      this.setLanguage(targetLang);
+
+  });      window.location.href = newPath;
+
+}    },
+
+
+
+// Global functions for buttons    filterSidebar: function (currentLang) {
+
+function switchToSpanish() {      // Find all sidebar navigation links - try multiple selectors
+
+  switchToLanguage('es');      var possibleSelectors = [
+
+}        "#sidebar .nav a",
+
         "#sidebar nav a",
-        ".sidebar .nav a",
-        ".sidebar nav a",
-        '[data-toggle="sidebar"] a',
+
+function switchToEnglish() {        ".sidebar .nav a",
+
+  switchToLanguage('en');        ".sidebar nav a",
+
+}        '[data-toggle="sidebar"] a',
+
         ".nav-link",
-      ];
 
-      var links = [];
-      possibleSelectors.forEach(function (selector) {
-        var found = document.querySelectorAll(selector);
-        if (found.length > 0) {
-          links = Array.from(found);
-        }
-      });
+// Initialize when page loads      ];
 
-      // Debug: log what we found
-      console.log("Found " + links.length + " sidebar links");
+document.addEventListener('DOMContentLoaded', function() {
 
-      // Hide tabs that don't match current language
-      links.forEach(function (link) {
-        var span = link.querySelector("span");
-        if (span) {
-          var text = span.textContent.trim();
+  // Hide duplicate tabs immediately      var links = [];
 
-          // Define duplicates to hide
-          var shouldHide = false;
+  hideDuplicateTabs();      possibleSelectors.forEach(function (selector) {
+
+          var found = document.querySelectorAll(selector);
+
+  // Also run after a delay to catch late-loading elements        if (found.length > 0) {
+
+  setTimeout(hideDuplicateTabs, 500);          links = Array.from(found);
+
+  setTimeout(hideDuplicateTabs, 1500);        }
+
+        });
+
+  // Set up language toggle buttons
+
+  var toggleButtons = document.querySelectorAll('.language-toggle');      // Debug: log what we found
+
+  toggleButtons.forEach(function(button) {      console.log("Found " + links.length + " sidebar links");
+
+    var currentLang = getCurrentLanguage();
+
+    if (currentLang === 'es') {      // Hide tabs that don't match current language
+
+      button.textContent = 'Read in English';      links.forEach(function (link) {
+
+      button.onclick = switchToEnglish;        var span = link.querySelector("span");
+
+    } else {        if (span) {
+
+      button.textContent = 'Leer en Español';          var text = span.textContent.trim();
+
+      button.onclick = switchToSpanish;
+
+    }          // Define duplicates to hide
+
+  });          var shouldHide = false;
+
+});
 
           if (currentLang === "en") {
-            // Hide Spanish tabs when on English pages
-            if (
-              [
-                "Inicio",
-                "Categorías",
-                "Etiquetas",
-                "Archivo",
+
+// Re-run on navigation changes (for SPAs)            // Hide Spanish tabs when on English pages
+
+if (window.addEventListener) {            if (
+
+  window.addEventListener('popstate', function() {              [
+
+    setTimeout(hideDuplicateTabs, 100);                "Inicio",
+
+  });                "Categorías",
+
+}                "Etiquetas",
+
+</script>                "Archivo",
                 "Acerca de",
               ].includes(text)
             ) {

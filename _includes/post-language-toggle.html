@@ -13,7 +13,7 @@ assign post_slug = page.slug | default: page.title | slugify %}
       Read in English
     </a>
     {% else %}
-    <button class="btn btn-outline-primary btn-sm language-toggle">
+    <button class="btn btn-outline-primary btn-sm" onclick="switchToEnglish()">
       <i class="fas fa-language me-1"></i>
       Read in English
     </button>
@@ -29,7 +29,7 @@ assign post_slug = page.slug | default: page.title | slugify %}
       Leer en Español
     </a>
     {% else %}
-    <button class="btn btn-outline-primary btn-sm language-toggle">
+    <button class="btn btn-outline-primary btn-sm" onclick="switchToSpanish()">
       <i class="fas fa-language me-1"></i>
       Leer en Español
     </button>
