@@ -1,67 +1,130 @@
-<!-- Simple Language System --><!-- Enhanced Language System -->
+<!-- Simple Language System --><!-- Simple Language System --><!-- Enhanced Language System -->
 
-<script><script>
+<script>
 
-// Simple and robust language system  // Language persistence and detection system
+// Simple and robust language system<script><script>
 
-function getCurrentLanguage() {  var LanguageSystem = {
+function getCurrentLanguage() {
 
-  var path = window.location.pathname;    getCurrentLang: function () {
+  var path = window.location.pathname;// Simple and robust language system  // Language persistence and detection system
 
-  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';      // 1. Check URL first
+  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';
 
-}      if (
+}function getCurrentLanguage() {  var LanguageSystem = {
 
-        window.location.pathname.includes("/es/") ||
 
-function switchToLanguage(targetLang) {        window.location.pathname === "/es"
 
-  var currentPath = window.location.pathname;      ) {
+function switchToLanguage(targetLang) {  var path = window.location.pathname;    getCurrentLang: function () {
 
-  var newPath;        return "es";
+  var currentPath = window.location.pathname;
 
-        }
+  var newPath;  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';      // 1. Check URL first
 
-  if (targetLang === 'es') {
+  
 
-    if (currentPath.includes('/es/')) return; // Already in Spanish      // 2. Check localStorage for user preference
+  if (targetLang === 'es') {}      if (
 
-          var savedLang = localStorage.getItem("preferred_language");
+    if (currentPath.includes('/es/')) return; // Already in Spanish
 
-    // Map common pages to Spanish      if (savedLang && ["en", "es"].includes(savedLang)) {
+            window.location.pathname.includes("/es/") ||
 
-    if (currentPath === '/' || currentPath === '/index.html') {        return savedLang;
+    // Map common pages to Spanish
 
-      newPath = '/es/';      }
-
-    } else if (currentPath.includes('/about')) {
-
-      newPath = '/es/about/';      // 3. Default to English
-
-    } else if (currentPath.includes('/categories')) {      return "en";
-
-      newPath = '/es/categories/';    },
-
-    } else if (currentPath.includes('/tags')) {
-
-      newPath = '/es/tags/';    setLanguage: function (lang) {
-
-    } else if (currentPath.includes('/archives')) {      localStorage.setItem("preferred_language", lang);
-
-      newPath = '/es/archives/';      this.updatePageForLanguage(lang);
-
-    } else {    },
+    if (currentPath === '/' || currentPath === '/index.html') {function switchToLanguage(targetLang) {        window.location.pathname === "/es"
 
       newPath = '/es/';
 
-    }    updatePageForLanguage: function (lang) {
+    } else if (currentPath.includes('/about')) {  var currentPath = window.location.pathname;      ) {
 
-  } else {      // Update HTML lang attribute
+      newPath = '/es/about/';
 
-    if (!currentPath.includes('/es/')) return; // Already in English      document.documentElement.lang = lang;
+    } else if (currentPath.includes('/categories')) {  var newPath;        return "es";
+
+      newPath = '/es/categories/';
+
+    } else if (currentPath.includes('/tags')) {        }
+
+      newPath = '/es/tags/';
+
+    } else if (currentPath.includes('/archives')) {  if (targetLang === 'es') {
+
+      newPath = '/es/archives/';
+
+    } else {    if (currentPath.includes('/es/')) return; // Already in Spanish      // 2. Check localStorage for user preference
+
+      newPath = '/es/';
+
+    }          var savedLang = localStorage.getItem("preferred_language");
+
+  } else {
+
+    if (!currentPath.includes('/es/')) return; // Already in English    // Map common pages to Spanish      if (savedLang && ["en", "es"].includes(savedLang)) {
 
     
 
+    // Remove /es prefix    if (currentPath === '/' || currentPath === '/index.html') {        return savedLang;
+
+    newPath = currentPath.replace('/es', '') || '/';
+
+  }      newPath = '/es/';      }
+
+  
+
+  window.location.href = newPath;    } else if (currentPath.includes('/about')) {
+
+}
+
+      newPath = '/es/about/';      // 3. Default to English
+
+// Global functions for buttons
+
+function switchToSpanish() {    } else if (currentPath.includes('/categories')) {      return "en";
+
+  switchToLanguage('es');
+
+}      newPath = '/es/categories/';    },
+
+
+
+function switchToEnglish() {    } else if (currentPath.includes('/tags')) {
+
+  switchToLanguage('en');
+
+}      newPath = '/es/tags/';    setLanguage: function (lang) {
+
+
+
+// Initialize when page loads    } else if (currentPath.includes('/archives')) {      localStorage.setItem("preferred_language", lang);
+
+document.addEventListener('DOMContentLoaded', function() {
+
+  // Set up language toggle buttons      newPath = '/es/archives/';      this.updatePageForLanguage(lang);
+
+  var toggleButtons = document.querySelectorAll('.language-toggle');
+
+  toggleButtons.forEach(function(button) {    } else {    },
+
+    var currentLang = getCurrentLanguage();
+
+    if (currentLang === 'es') {      newPath = '/es/';
+
+      button.textContent = 'Read in English';
+
+      button.onclick = switchToEnglish;    }    updatePageForLanguage: function (lang) {
+
+    } else {
+
+      button.textContent = 'Leer en Español';  } else {      // Update HTML lang attribute
+
+      button.onclick = switchToSpanish;
+
+    }    if (!currentPath.includes('/es/')) return; // Already in English      document.documentElement.lang = lang;
+
+  });
+
+});    
+
+</script>
     // Remove /es prefix      // Update body class for styling
 
     newPath = currentPath.replace('/es', '') || '/';      document.body.classList.remove("lang-en", "lang-es");
