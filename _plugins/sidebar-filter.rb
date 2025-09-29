@@ -1,10 +1,22 @@
 Jekyll::Hooks.register :site, :post_read do |site|
-  # Set default language for all tabs  
+  # Set default language for all tabs and remove language-specific duplicates
   return unless site.collections['tabs']
   
+  # Set default language
   site.collections['tabs'].docs.each do |tab|
     tab.data['lang'] ||= 'en'
   end
+  
+  # Get the current language from site config
+  current_lang = site.config['lang'] || 'en'
+  
+  # Filter out tabs that don't match the current language
+  filtered_docs = site.collections['tabs'].docs.select do |tab|
+    (tab.data['lang'] || 'en') == current_lang
+  end
+  
+  # Replace the docs array
+  site.collections['tabs'].docs.replace(filtered_docs)
 end
 
 # Add JavaScript to filter sidebar after page load

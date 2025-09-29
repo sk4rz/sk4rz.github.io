@@ -1,19 +1,25 @@
 <!-- Filtered sidebar navigation for multilingual support -->
-{% assign current_lang = page.lang | default: site.lang | default: 'en' %}
-{% assign filtered_tabs = site.tabs | tabs_by_lang: current_lang %}
+{% assign current_lang = page.lang | default: site.lang | default: 'en' %} {%
+assign filtered_tabs = site.tabs | tabs_by_lang: current_lang %}
 
 <nav class="nav flex-column flex-grow-1 w-100 ps-0">
   <!-- Home Tab -->
-  <a href="{{ '/' | relative_url }}" class="nav-link{% if page.layout == 'home' %} active{% endif %}">
+  <a
+    href="{{ '/' | relative_url }}"
+    class="nav-link{% if page.layout == 'home' %} active{% endif %}"
+  >
     <i class="fa-fw fas fa-home"></i>
     <span>{% if current_lang == 'es' %}Inicio{% else %}Home{% endif %}</span>
   </a>
 
   <!-- Dynamic filtered tabs -->
   {% for tab in filtered_tabs %}
-    <a href="{{ tab.url | relative_url }}" class="nav-link{% if tab.url == page.url %} active{% endif %}">
-      <i class="fa-fw {{ tab.icon }}"></i>
-      <span>{{ tab.title }}</span>
-    </a>
+  <a
+    href="{{ tab.url | relative_url }}"
+    class="nav-link{% if tab.url == page.url %} active{% endif %}"
+  >
+    <i class="fa-fw {{ tab.icon }}"></i>
+    <span>{{ tab.title }}</span>
+  </a>
   {% endfor %}
 </nav>

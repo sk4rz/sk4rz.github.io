@@ -3,41 +3,70 @@
 
 <!-- Sidebar filtering script -->
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+function filterSidebar() {
   // Get current page language
-  var currentLang = 'en';
+  var currentLang = "en";
   
   // Check if we're on a Spanish page
-  if (document.body.classList.contains('es') || 
-      window.location.pathname.includes('/es/') ||
-      document.querySelector('html[lang="es"]')) {
-    currentLang = 'es';
+  if (window.location.pathname.includes("/es/")) {
+    currentLang = "es";
   }
   
-  // Define which tabs to show for each language
-  var visibleTabs = {
-    'en': ['Home', 'Categories', 'Tags', 'Archives', 'About'],
-    'es': ['Inicio', 'Categorías', 'Etiquetas', 'Archivo', 'Acerca de']
-  };
+  // Find all sidebar navigation links - try multiple selectors
+  var possibleSelectors = [
+    '#sidebar .nav a',
+    '#sidebar nav a', 
+    '.sidebar .nav a',
+    '.sidebar nav a',
+    '[data-toggle="sidebar"] a',
+    '.nav-link'
+  ];
   
-  // Hide unwanted tabs
-  setTimeout(function() {
-    var sidebarNav = document.querySelector('#sidebar nav, .sidebar nav');
-    if (sidebarNav) {
-      var links = sidebarNav.querySelectorAll('a');
-      
-      links.forEach(function(link) {
-        var span = link.querySelector('span');
-        if (span) {
-          var text = span.textContent.trim();
-          var shouldShow = visibleTabs[currentLang].includes(text);
-          
-          if (!shouldShow) {
-            link.style.display = 'none';
-          }
-        }
-      });
+  var links = [];
+  possibleSelectors.forEach(function(selector) {
+    var found = document.querySelectorAll(selector);
+    if (found.length > 0) {
+      links = Array.from(found);
     }
-  }, 100);
+  });
+  
+  // Debug: log what we found
+  console.log('Found ' + links.length + ' sidebar links');
+  
+  // Hide tabs that don't match current language
+  links.forEach(function(link) {
+    var span = link.querySelector('span');
+    if (span) {
+      var text = span.textContent.trim();
+      console.log('Found tab: ' + text);
+      
+      // Define duplicates to hide
+      var shouldHide = false;
+      
+      if (currentLang === 'en') {
+        // Hide Spanish tabs when on English pages
+        if (['Inicio', 'Categorías', 'Etiquetas', 'Archivo', 'Acerca de'].includes(text)) {
+          shouldHide = true;
+        }
+      } else {
+        // Hide English tabs when on Spanish pages  
+        if (['Home', 'Categories', 'Tags', 'Archives', 'About'].includes(text)) {
+          shouldHide = true;
+        }
+      }
+      
+      if (shouldHide) {
+        link.style.display = 'none';
+        console.log('Hiding tab: ' + text);
+      }
+    }
+  });
+}
+
+// Run the filter function
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(filterSidebar, 100);
+  // Run again after a longer delay in case the sidebar loads slowly
+  setTimeout(filterSidebar, 1000);
 });
 </script>
