@@ -1,2 +1,43 @@
 <!-- Language system scripts -->
 <script src="{{ '/assets/js/language-switcher.js' | relative_url }}"></script>
+
+<!-- Sidebar filtering script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Get current page language
+  var currentLang = 'en';
+  
+  // Check if we're on a Spanish page
+  if (document.body.classList.contains('es') || 
+      window.location.pathname.includes('/es/') ||
+      document.querySelector('html[lang="es"]')) {
+    currentLang = 'es';
+  }
+  
+  // Define which tabs to show for each language
+  var visibleTabs = {
+    'en': ['Home', 'Categories', 'Tags', 'Archives', 'About'],
+    'es': ['Inicio', 'Categorías', 'Etiquetas', 'Archivo', 'Acerca de']
+  };
+  
+  // Hide unwanted tabs
+  setTimeout(function() {
+    var sidebarNav = document.querySelector('#sidebar nav, .sidebar nav');
+    if (sidebarNav) {
+      var links = sidebarNav.querySelectorAll('a');
+      
+      links.forEach(function(link) {
+        var span = link.querySelector('span');
+        if (span) {
+          var text = span.textContent.trim();
+          var shouldShow = visibleTabs[currentLang].includes(text);
+          
+          if (!shouldShow) {
+            link.style.display = 'none';
+          }
+        }
+      });
+    }
+  }, 100);
+});
+</script>

@@ -1,40 +1,54 @@
 Jekyll::Hooks.register :site, :post_read do |site|
-  # Filter tabs by language for the sidebar
+  # Set default language for all tabs  
   return unless site.collections['tabs']
   
   site.collections['tabs'].docs.each do |tab|
-    # Set default language if not specified
     tab.data['lang'] ||= 'en'
   end
 end
 
-Jekyll::Hooks.register :site, :pre_render do |site, payload|
-  # Skip if tabs collection doesn't exist
-  return unless site.collections['tabs']
+# Add JavaScript to filter sidebar after page load
+Jekyll::Hooks.register :site, :post_write do |site|
+  # Create a JavaScript file to handle sidebar filtering
+  js_content = <<~JS
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get current page language
+      var currentLang = document.documentElement.lang || 'en';
+      if (document.body.classList.contains('es') || window.location.pathname.includes('/es/')) {
+        currentLang = 'es';
+      }
+      
+      // Define tab mappings
+      var tabMappings = {
+        'en': ['Home', 'Categories', 'Tags', 'Archives', 'About'],
+        'es': ['Inicio', 'Categorías', 'Etiquetas', 'Archivo', 'Acerca de']
+      };
+      
+      // Hide duplicate tabs
+      var sidebarLinks = document.querySelectorAll('#sidebar .nav-link');
+      var seenTabs = new Set();
+      
+      sidebarLinks.forEach(function(link) {
+        var linkText = link.querySelector('span');
+        if (linkText) {
+          var text = linkText.textContent.trim();
+          
+          // Check if this tab should be shown in current language
+          var shouldShow = tabMappings[currentLang].includes(text);
+          
+          if (!shouldShow || seenTabs.has(text)) {
+            link.style.display = 'none';
+          } else {
+            seenTabs.add(text);
+            link.style.display = '';
+          }
+        }
+      });
+    });
+  JS
   
-  # Filter tabs based on current page language
-  current_page = payload['page']
-  
-  # Safely get current language with multiple fallbacks
-  current_lang = case
-                 when current_page && current_page['lang']
-                   current_page['lang']
-                 when payload['site'] && payload['site']['lang']
-                   payload['site']['lang']
-                 when site.config['lang']
-                   site.config['lang']
-                 else
-                   'en'
-                 end
-  
-  # Filter tabs collection to show only tabs matching current language
-  filtered_tabs = site.collections['tabs'].docs.select do |tab|
-    (tab.data['lang'] || 'en') == current_lang
-  end
-  
-  # Sort by order if order is specified
-  filtered_tabs.sort_by! { |tab| tab.data['order'] || 999 }
-  
-  # Replace the tabs collection with filtered tabs
-  payload['site']['tabs'] = filtered_tabs
+  # Write the JavaScript file
+  js_file_path = File.join(site.dest, 'assets', 'js', 'sidebar-filter.js')
+  FileUtils.mkdir_p(File.dirname(js_file_path))
+  File.write(js_file_path, js_content)
 end
