@@ -1,0 +1,19 @@
+<!-- Inject post language metadata into HTML for JavaScript filtering -->
+<script type="application/json" id="posts-metadata">
+{
+  "posts": [
+    {% for post in site.posts %}
+    {
+      "title": {{ post.title | jsonify }},
+      "lang": {{ post.lang | default: "en" | jsonify }},
+      "url": {{ post.url | jsonify }},
+      "categories": {{ post.categories | jsonify }},
+      "tags": {{ post.tags | jsonify }},
+      "date": {{ post.date | date: "%Y-%m-%d" | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ],
+  "currentLang": {{ page.lang | default: "en" | jsonify }},
+  "isSpanishPage": {% if page.lang == "es" %}true{% else %}false{% endif %}
+}
+</script>
