@@ -1,6 +1,5 @@
-<!--
-  The Side Bar
--->
+<!-- OVERRIDE CHIRPY SIDEBAR - FILTER BY LANGUAGE -->
+{% assign current_lang = page.lang | default: site.lang | default: 'en' %}
 
 <div id="sidebar" class="d-flex flex-column align-items-end">
   <div class="profile-wrapper">
@@ -25,9 +24,7 @@
     </div>
   </div>
 
-  <!-- CUSTOM NAVIGATION - NO DUPLICATES -->
-  {% assign current_lang = include.lang | default: page.lang | default: site.lang | default: 'en' %}
-  
+  <!-- LANGUAGE-FILTERED NAVIGATION -->
   <nav class="flex-column flex-grow-1 w-100 ps-0" id="sidebar-nav">
     <!-- Home link -->
     {% if current_lang == 'es' %}
@@ -42,9 +39,9 @@
       </a>
     {% endif %}
 
-    <!-- Navigation tabs filtered by language -->
-    {% assign all_tabs = site.tabs | sort: 'order' %}
-    {% for tab in all_tabs %}
+    <!-- Filter tabs by language -->
+    {% assign sorted_tabs = site.tabs | sort: 'order' %}
+    {% for tab in sorted_tabs %}
       {% assign tab_lang = tab.lang | default: 'en' %}
       {% if tab_lang == current_lang %}
         <a href="{{ tab.url | relative_url }}" class="nav-link{% if tab.url == page.url %} active{% endif %}">

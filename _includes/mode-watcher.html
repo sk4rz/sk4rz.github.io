@@ -1,0 +1,72 @@
+<!--
+  The script switches the mode between light/dark.
+-->
+
+<script type="text/javascript">
+  class ModeWatcher {
+    constructor() {
+      this.DARK = 'dark';
+      this.LIGHT = 'light';
+      this.LIGHT_MODE_MEDIA = '(prefers-color-scheme: light)';
+      this.DARK_MODE_MEDIA = '(prefers-color-scheme: dark)';
+      this.KEY = 'mode';
+      this.AUTO = 'auto';
+      this.MODE_TOGGLE_SELECTOR = '.mode-toggle';
+      this.SUN = 'fa-sun';
+      this.MOON = 'fa-moon';
+      this.TOGGLE_SELECTOR = 'i';
+
+      this.modeToggle = document.querySelector(this.MODE_TOGGLE_SELECTOR);
+      this.init();
+    }
+
+    init() {
+      if (this.modeToggle !== null) {
+        this.setUpModeToggle();
+      }
+    }
+
+    setUpModeToggle() {
+      this.modeToggle.addEventListener('click', () => {
+        this.flipMode();
+      });
+    }
+
+    flipMode() {
+      const mode = this.currentMode === this.LIGHT ? this.DARK : this.LIGHT;
+      this.setMode(mode);
+    }
+
+    setMode(mode) {
+      this.currentMode = mode;
+      localStorage.setItem(this.KEY, mode);
+      this.updatePageMode();
+    }
+
+    get currentMode() {
+      let mode = localStorage.getItem(this.KEY);
+      
+      if (mode === null) {
+        const isSystemDark = window.matchMedia(this.DARK_MODE_MEDIA).matches;
+        mode = isSystemDark ? this.DARK : this.LIGHT;
+      }
+
+      return mode;
+    }
+
+    updatePageMode() {
+      const mode = this.currentMode;
+      document.documentElement.setAttribute('data-mode', mode);
+      
+      if (this.modeToggle !== null) {
+        const icon = this.modeToggle.querySelector(this.TOGGLE_SELECTOR);
+        if (icon !== null) {
+          icon.classList.toggle(this.SUN, mode === this.DARK);
+          icon.classList.toggle(this.MOON, mode === this.LIGHT);
+        }
+      }
+    }
+  }
+
+  const modeWatcher = new ModeWatcher();
+</script>
