@@ -1,17 +1,21 @@
 #  The contact options.
 
 - type: github
-  icon: "fab fa-github"
+  icon: "fab fa-github" 
+  value: "https://github.com/sk4rz"
 
 - type: twitter
   icon: "fa-brands fa-x-twitter"
+  value: "https://twitter.com/sk4rz"
 
 - type: email
   icon: "fas fa-envelope"
+  value: "contact@sk4rz.dev"
   noblank: true # open link in current tab
 
 - type: rss
   icon: "fas fa-rss"
+  value: "/feed.xml"
   noblank: true
 # Uncomment and complete the url below to enable more contact options
 #
