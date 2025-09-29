@@ -29,20 +29,19 @@ github:
   username: sk4rz # change to your GitHub username
 
 twitter:
-  username: sk4rz_sec # change to your Twitter username
+  username: sk4rz_ # change to your Twitter username
 
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: "Oscar (sk4rz)"
-  email: sk4rz@protonmail.com # change to your email address
+  name: "Oscar Moreno Acosta (sk4rz)"
+  email: moacosta600@gmail.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
     - https://github.com/sk4rz # change to your GitHub homepage
-    - https://www.linkedin.com/in/sk4rz # change to your LinkedIn homepage
-    - https://app.hackthebox.com/profile/sk4rz # HackTheBox profile
-    # Uncomment below to add more social links
-    # - https://www.facebook.com/username
+    - https://www.linkedin.com/in/oscar-moreno-acosta-878627376/ # change to your LinkedIn homepage
+    - https://app.hackthebox.com/profile/545179 # HackTheBox profile
+    - https://x.com/sk4rz_ # Twitter/X profile
 
 # Site Verification Settings
 webmaster_verifications:
