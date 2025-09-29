@@ -1,48 +1,44 @@
-<!-- Simple Language System --><!-- Simple Language System --><!-- Enhanced Language System -->
+<!-- FORCE REMOVE DUPLICATES - AGGRESSIVE SOLUTION --><!-- Clean Language System --><!-- Simple Language System --><!-- Simple Language System --><!-- Enhanced Language System -->
 
 <script>
 
-// Simple and robust language system<script><script>
+function getCurrentLanguage() {<script>
 
-function getCurrentLanguage() {
+  var path = window.location.pathname;
 
-  var path = window.location.pathname;// Simple and robust language system  // Language persistence and detection system
+  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';function getCurrentLanguage() {<script>
 
-  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';
+}
 
-}function getCurrentLanguage() {  var LanguageSystem = {
+  var path = window.location.pathname;
 
+function switchToLanguage(targetLang) {
 
+  var currentPath = window.location.pathname;  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';// Simple and robust language system<script><script>
 
-function switchToLanguage(targetLang) {  var path = window.location.pathname;    getCurrentLang: function () {
+  var newPath;
 
-  var currentPath = window.location.pathname;
+  }
 
-  var newPath;  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';      // 1. Check URL first
+  if (targetLang === 'es') {
 
-  
+    if (currentPath.includes('/es/')) return;function getCurrentLanguage() {
 
-  if (targetLang === 'es') {}      if (
+    
 
-    if (currentPath.includes('/es/')) return; // Already in Spanish
-
-            window.location.pathname.includes("/es/") ||
-
-    // Map common pages to Spanish
-
-    if (currentPath === '/' || currentPath === '/index.html') {function switchToLanguage(targetLang) {        window.location.pathname === "/es"
+    if (currentPath === '/' || currentPath === '/index.html') {function switchToLanguage(targetLang) {
 
       newPath = '/es/';
 
-    } else if (currentPath.includes('/about')) {  var currentPath = window.location.pathname;      ) {
+    } else if (currentPath.includes('/about')) {  var currentPath = window.location.pathname;  var path = window.location.pathname;// Simple and robust language system  // Language persistence and detection system
 
       newPath = '/es/about/';
 
-    } else if (currentPath.includes('/categories')) {  var newPath;        return "es";
+    } else if (currentPath.includes('/categories')) {  var newPath;
 
       newPath = '/es/categories/';
 
-    } else if (currentPath.includes('/tags')) {        }
+    } else if (currentPath.includes('/tags')) {    return (path.includes('/es/') || path === '/es') ? 'es' : 'en';
 
       newPath = '/es/tags/';
 
@@ -50,38 +46,237 @@ function switchToLanguage(targetLang) {  var path = window.location.pathname;   
 
       newPath = '/es/archives/';
 
-    } else {    if (currentPath.includes('/es/')) return; // Already in Spanish      // 2. Check localStorage for user preference
+    } else {    if (currentPath.includes('/es/')) return;}function getCurrentLanguage() {  var LanguageSystem = {
 
       newPath = '/es/';
 
-    }          var savedLang = localStorage.getItem("preferred_language");
+    }    
 
   } else {
 
-    if (!currentPath.includes('/es/')) return; // Already in English    // Map common pages to Spanish      if (savedLang && ["en", "es"].includes(savedLang)) {
-
-    
-
-    // Remove /es prefix    if (currentPath === '/' || currentPath === '/index.html') {        return savedLang;
+    if (!currentPath.includes('/es/')) return;    if (currentPath === '/' || currentPath === '/index.html') {
 
     newPath = currentPath.replace('/es', '') || '/';
 
-  }      newPath = '/es/';      }
+  }      newPath = '/es/';
 
   
 
-  window.location.href = newPath;    } else if (currentPath.includes('/about')) {
+  window.location.href = newPath;    } else if (currentPath.includes('/about')) {function switchToLanguage(targetLang) {  var path = window.location.pathname;    getCurrentLang: function () {
 
 }
 
-      newPath = '/es/about/';      // 3. Default to English
+      newPath = '/es/about/';
 
-// Global functions for buttons
+function forceRemoveDuplicates() {
 
-function switchToSpanish() {    } else if (currentPath.includes('/categories')) {      return "en";
+  var currentLang = getCurrentLanguage();    } else if (currentPath.includes('/categories')) {  var currentPath = window.location.pathname;
 
-  switchToLanguage('es');
+  console.log('FORCING removal of duplicates for language:', currentLang);
 
+        newPath = '/es/categories/';
+
+  // VERY aggressive selectors - catch everything
+
+  var allLinks = document.querySelectorAll('a');    } else if (currentPath.includes('/tags')) {  var newPath;  return (path.includes('/es/') || path === '/es') ? 'es' : 'en';      // 1. Check URL first
+
+  
+
+  var englishTabs = ['Home', 'Categories', 'Tags', 'Archives', 'About'];      newPath = '/es/tags/';
+
+  var spanishTabs = ['Inicio', 'Categorías', 'Etiquetas', 'Archivo', 'Acerca de'];
+
+      } else if (currentPath.includes('/archives')) {  
+
+  var removedCount = 0;
+
+        newPath = '/es/archives/';
+
+  allLinks.forEach(function(link) {
+
+    var text = link.textContent.trim();    } else {  if (targetLang === 'es') {}      if (
+
+    var shouldHide = false;
+
+          newPath = '/es/';
+
+    if (currentLang === 'es') {
+
+      shouldHide = englishTabs.includes(text);    }    if (currentPath.includes('/es/')) return; // Already in Spanish
+
+    } else {
+
+      shouldHide = spanishTabs.includes(text);  } else {
+
+    }
+
+        if (!currentPath.includes('/es/')) return;            window.location.pathname.includes("/es/") ||
+
+    if (shouldHide) {
+
+      console.log('FORCE HIDING:', text);    newPath = currentPath.replace('/es', '') || '/';
+
+      link.style.display = 'none';
+
+      link.style.visibility = 'hidden';  }    // Map common pages to Spanish
+
+      
+
+      var parent = link.parentElement;  
+
+      if (parent && parent.tagName === 'LI') {
+
+        parent.style.display = 'none';  window.location.href = newPath;    if (currentPath === '/' || currentPath === '/index.html') {function switchToLanguage(targetLang) {        window.location.pathname === "/es"
+
+      }
+
+      removedCount++;}
+
+    }
+
+  });      newPath = '/es/';
+
+  
+
+  console.log('FORCE REMOVED', removedCount, 'duplicate navigation items');function switchToSpanish() {
+
+}
+
+  switchToLanguage('es');    } else if (currentPath.includes('/about')) {  var currentPath = window.location.pathname;      ) {
+
+function switchToSpanish() {
+
+  switchToLanguage('es');}
+
+}
+
+      newPath = '/es/about/';
+
+function switchToEnglish() {
+
+  switchToLanguage('en');function switchToEnglish() {
+
+}
+
+  switchToLanguage('en');    } else if (currentPath.includes('/categories')) {  var newPath;        return "es";
+
+// AGGRESSIVE loading - run immediately and repeatedly
+
+(function() {}
+
+  console.log('AGGRESSIVE duplicate removal starting...');
+
+        newPath = '/es/categories/';
+
+  // Run immediately if DOM is already loaded
+
+  if (document.readyState !== 'loading') {document.addEventListener('DOMContentLoaded', function() {
+
+    forceRemoveDuplicates();
+
+  }  var toggleButtons = document.querySelectorAll('.language-toggle');    } else if (currentPath.includes('/tags')) {        }
+
+  
+
+  // Run on DOM ready  toggleButtons.forEach(function(button) {
+
+  document.addEventListener('DOMContentLoaded', function() {
+
+    console.log('DOM ready - forcing duplicate removal');    var currentLang = getCurrentLanguage();      newPath = '/es/tags/';
+
+    forceRemoveDuplicates();
+
+        if (currentLang === 'es') {
+
+    // Set up toggle buttons
+
+    var toggleButtons = document.querySelectorAll('.language-toggle');      button.textContent = 'Read in English';    } else if (currentPath.includes('/archives')) {  if (targetLang === 'es') {
+
+    toggleButtons.forEach(function(button) {
+
+      var currentLang = getCurrentLanguage();      button.onclick = switchToEnglish;
+
+      if (currentLang === 'es') {
+
+        button.textContent = 'Read in English';    } else {      newPath = '/es/archives/';
+
+        button.onclick = switchToEnglish;
+
+      } else {      button.textContent = 'Leer en Español';
+
+        button.textContent = 'Leer en Español';
+
+        button.onclick = switchToSpanish;      button.onclick = switchToSpanish;    } else {    if (currentPath.includes('/es/')) return; // Already in Spanish      // 2. Check localStorage for user preference
+
+      }
+
+    });    }
+
+  });
+
+    });      newPath = '/es/';
+
+  // Run on window load
+
+  window.addEventListener('load', function() {});
+
+    console.log('Window loaded - forcing duplicate removal again');
+
+    forceRemoveDuplicates();</script>    }          var savedLang = localStorage.getItem("preferred_language");
+
+  });
+
+    } else {
+
+  // Run multiple times with delays
+
+  setTimeout(forceRemoveDuplicates, 100);    if (!currentPath.includes('/es/')) return; // Already in English    // Map common pages to Spanish      if (savedLang && ["en", "es"].includes(savedLang)) {
+
+  setTimeout(forceRemoveDuplicates, 300);
+
+  setTimeout(forceRemoveDuplicates, 500);    
+
+  setTimeout(forceRemoveDuplicates, 1000);
+
+  setTimeout(forceRemoveDuplicates, 2000);    // Remove /es prefix    if (currentPath === '/' || currentPath === '/index.html') {        return savedLang;
+
+  setTimeout(forceRemoveDuplicates, 3000);
+
+      newPath = currentPath.replace('/es', '') || '/';
+
+  // Monitor for changes
+
+  if (window.MutationObserver) {  }      newPath = '/es/';      }
+
+    var observer = new MutationObserver(function() {
+
+      setTimeout(forceRemoveDuplicates, 100);  
+
+    });
+
+      window.location.href = newPath;    } else if (currentPath.includes('/about')) {
+
+    // Start observing as soon as possible
+
+    if (document.body) {}
+
+      observer.observe(document.body, { childList: true, subtree: true });
+
+    } else {      newPath = '/es/about/';      // 3. Default to English
+
+      document.addEventListener('DOMContentLoaded', function() {
+
+        observer.observe(document.body, { childList: true, subtree: true });// Global functions for buttons
+
+      });
+
+    }function switchToSpanish() {    } else if (currentPath.includes('/categories')) {      return "en";
+
+  }
+
+})();  switchToLanguage('es');
+
+</script>
 }      newPath = '/es/categories/';    },
 
 

@@ -17,24 +17,24 @@
 
   <!-- Language-specific tabs -->
   {% if current_lang == 'es' %}
-    <!-- Spanish tabs -->
-    {% for tab in site.tabs %}
-      {% if tab.lang == 'es' %}
-      <a href="{{ tab.url | relative_url }}" class="nav-link{% if tab.url == page.url %} active{% endif %}">
-        <i class="fa-fw {{ tab.icon }}"></i>
-        <span>{{ tab.title }}</span>
-      </a>
-      {% endif %}
-    {% endfor %}
-  {% else %}
-    <!-- English tabs -->
-    {% for tab in site.tabs %}
-      {% unless tab.lang == 'es' %}
-      <a href="{{ tab.url | relative_url }}" class="nav-link{% if tab.url == page.url %} active{% endif %}">
-        <i class="fa-fw {{ tab.icon }}"></i>
-        <span>{{ tab.title }}</span>
-      </a>
-      {% endunless %}
-    {% endfor %}
-  {% endif %}
+  <!-- Spanish tabs -->
+  {% for tab in site.tabs %} {% if tab.lang == 'es' %}
+  <a
+    href="{{ tab.url | relative_url }}"
+    class="nav-link{% if tab.url == page.url %} active{% endif %}"
+  >
+    <i class="fa-fw {{ tab.icon }}"></i>
+    <span>{{ tab.title }}</span>
+  </a>
+  {% endif %} {% endfor %} {% else %}
+  <!-- English tabs -->
+  {% for tab in site.tabs %} {% unless tab.lang == 'es' %}
+  <a
+    href="{{ tab.url | relative_url }}"
+    class="nav-link{% if tab.url == page.url %} active{% endif %}"
+  >
+    <i class="fa-fw {{ tab.icon }}"></i>
+    <span>{{ tab.title }}</span>
+  </a>
+  {% endunless %} {% endfor %} {% endif %}
 </nav>
