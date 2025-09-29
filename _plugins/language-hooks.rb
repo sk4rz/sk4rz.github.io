@@ -1,31 +1,33 @@
 Jekyll::Hooks.register :site, :post_read do |site|
-  # Set language based on path
+  # Set language for pages based on path
   site.pages.each do |page|
     if page.path.start_with?('es/')
       page.data['lang'] = 'es'
-    else
-      page.data['lang'] ||= 'en'
+    elsif page.data['lang'].nil?
+      page.data['lang'] = 'en'
     end
   end
   
-  # Set language for posts
+  # Set language for posts based on path
   site.posts.docs.each do |post|
-    if post.path.include?('/es/')
+    if post.path.include?('/es/_posts/')
       post.data['lang'] = 'es'
-    else
-      post.data['lang'] ||= 'en'
+    elsif post.data['lang'].nil?
+      post.data['lang'] = 'en'
     end
   end
 end
 
-Jekyll::Hooks.register :site, :pre_render do |site|
-  # Update site config based on current page language
-  current_lang = site.config['lang'] || 'en'
-  
-  if site.config['languages'] && site.config['languages'][current_lang]
-    lang_config = site.config['languages'][current_lang]
-    site.config['title'] = lang_config['title'] if lang_config['title']
-    site.config['tagline'] = lang_config['tagline'] if lang_config['tagline']
-    site.config['description'] = lang_config['description'] if lang_config['description']
+Jekyll::Hooks.register :pages, :pre_render do |page, payload|
+  # Set site language based on current page
+  if page.data['lang']
+    payload['site']['lang'] = page.data['lang']
+  end
+end
+
+Jekyll::Hooks.register :posts, :pre_render do |post, payload|
+  # Set site language based on current post
+  if post.data['lang']
+    payload['site']['lang'] = post.data['lang']
   end
 end

@@ -1,5 +1,6 @@
 <div class="language-selector">
   <div class="dropdown">
+    {% assign current_lang = page.lang | default: site.lang | default: 'en' %}
     <button
       class="btn btn-outline-primary btn-sm dropdown-toggle"
       type="button"
@@ -8,16 +9,23 @@
       aria-expanded="false"
     >
       <i class="fas fa-globe"></i>
-      {{ site.lang | lang_flag }} {{ site.lang | lang_name }}
+      {% if current_lang == 'es' %}🇪🇸 Español{% else %}🇺🇸 English{% endif %}
     </button>
     <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-      {% for lang in site.available_languages %} {% if lang != site.lang %}
-      <li>
-        <a class="dropdown-item" href="{{ lang | language_url }}">
-          {{ lang | lang_flag }} {{ lang | lang_name }}
-        </a>
-      </li>
-      {% endif %} {% endfor %}
+      {% if current_lang != 'en' %}
+        <li>
+          <a class="dropdown-item" href="{{ page.url | replace: '/es', '' | relative_url }}">
+            🇺🇸 English
+          </a>
+        </li>
+      {% endif %}
+      {% if current_lang != 'es' %}
+        <li>
+          <a class="dropdown-item" href="/es{{ page.url | relative_url }}">
+            🇪🇸 Español
+          </a>
+        </li>
+      {% endif %}
     </ul>
   </div>
 </div>

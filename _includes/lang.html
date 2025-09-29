@@ -1,0 +1,25 @@
+{% comment %}
+  Detect and set the current language based on page path and configuration
+{% endcomment %}
+
+{% assign current_lang = page.lang %}
+{% unless current_lang %}
+  {% if page.url contains '/es/' %}
+    {% assign current_lang = 'es' %}
+  {% else %}
+    {% assign current_lang = 'en' %}
+  {% endif %}
+{% endunless %}
+
+{% comment %}
+  Set site language globally for this page
+{% endcomment %}
+{% assign site_lang_backup = site.lang %}
+{% assign site.lang = current_lang %}
+
+{% comment %}
+  Update page language if not set
+{% endcomment %}
+{% unless page.lang %}
+  {% assign page.lang = current_lang %}
+{% endunless %}
