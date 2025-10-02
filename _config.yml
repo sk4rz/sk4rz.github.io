@@ -14,9 +14,9 @@ timezone: America/New_York
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: "sk4rz Blog" # the main title
+title: "sk4rz" # the main title
 
-tagline: "Technical blog focused on cybersecurity, malware analysis, and low-level programming" # it will display as the subtitle
+tagline: "Diving into low-level computing and systems" # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
   Technical blog focused on cybersecurity, malware analysis, and low-level programming by Oscar (sk4rz)
