@@ -6,38 +6,55 @@ lang: en
 title: "About"
 ---
 
-## {{ site.data.locales[site.lang].author.about_title | default: "About Me" }}
+# About 
 
-{{ site.data.locales[site.lang].author.bio_description | default: site.author.bio | markdownify }}
+Online, I'm **sk4rz**, but in person, I'm Oscar, a systems and computer engineering student with a deep passion for computing, especially the intricate details of low-level systems. I'm an enthusiastic learner, always diving into topics like malware analysis, reverse engineering, and system programming. This blog is my space to break down complex concepts into clear, understandable explanations, sharing my learning journey with those curious about the technical side of computing.
 
-## {{ site.data.locales[site.lang].author.skills_title | default: "Technical Skills" }}
+My goal is to explain technical topics from the ground up, in a way that reflects how I understand them—detailed yet approachable. By doing so, I reinforce my own knowledge while making these subjects more accessible to others. The blog will focus on:
 
-{% for skill in site.author.skills %}
-- {{ skill }}
-{% endfor %}
+- Low-level programming
+- Assembly language
+- Malware analysis
+- Advanced software techniques
 
-## {{ site.data.locales[site.lang].author.interests_title | default: "Areas of Interest" }}
+I hope you find the content helpful and join me in exploring the fascinating world of low-level computing.
 
-{% for interest in site.author.interests %}
-- {{ interest }}
-{% endfor %}
+## Currently Working On
+- Web development with Laravel (PHP)
+- Strengthening my backend and system programming skills
 
-## {{ site.data.locales[site.lang].author.learning_title | default: "Learning Journey" }}
+## Currently Learning
+- JavaScript for full-stack development
+- Malware analysis and reverse engineering (beginner level)
+- CTF challenges to sharpen my problem-solving skills
 
-{{ site.data.locales[site.lang].author.learning_description | markdownify }}
+## Looking to Collaborate On
+- Open-source projects in security or software development
+- Web applications with a focus on backend systems
 
-## {{ site.data.locales[site.lang].author.blog_title | default: "About This Blog" }}
+## Skills
+- Programming in C/C++/C# and Python
+- Assembly Language (learning)
+- Malware Analysis (learning)
+- Reverse Engineering (learning)
+- Penetration Testing
+- Linux Essentials / Bash / Dotfiles
+- Web Security
 
-{{ site.data.locales[site.lang].author.blog_description | markdownify }}
+## Interests
+- Information Security
+- Malware Research
+- Vulnerability Research
+- CTF Competitions
+- System Programming
+- Cryptography
 
-## {{ site.data.locales[site.lang].author.contact_title | default: "Get In Touch" }}
-
-{{ site.data.locales[site.lang].author.contact_description | markdownify }}
-
-{% for link in site.social.links %}
-- [{{ link | split: '//' | last | split: '/' | first | capitalize }}]({{ link }})
-{% endfor %}
-
----
-
-{% include post-language-toggle.html %}
+```
+   >_ [sk4rz@fs0ciety] ~
+   $ whoami
+   > hacker | learner | engineer
+   $ sudo ./exploit
+   [==========================]
+   [  INITIALIZING  SYSTEMS   ]
+   [==========================]
+```

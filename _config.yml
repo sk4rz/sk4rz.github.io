@@ -252,13 +252,13 @@ author:
   name: "Oscar (sk4rz)"
   age: 19
   occupation: "Systems Engineering Student"
-  bio: "Cybersecurity enthusiast and developer passionate about low-level programming, malware analysis, and system security."
+  bio: "Systems and Computer Engineering student | Interested in cybersecurity, ethical hacking, and programming | Always learning."
   skills:
     - "C/C++ Programming"
     - "Python Development"
-    - "Assembly Language"
-    - "Malware Analysis"
-    - "Reverse Engineering"
+    - "Assembly Language (Learning)"
+    - "Malware Analysis (Learning)"
+    - "Reverse Engineering (Learning)"
     - "Penetration Testing"
     - "Linux System Administration"
     - "PHP Development"
