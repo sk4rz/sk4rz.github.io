@@ -49,6 +49,15 @@ I hope you find the content helpful and join me in exploring the fascinating wor
 - System Programming
 - Cryptography
 
+## Get In Touch
+I’m always interested in connecting with fellow security researchers, developers, and students. Feel free to reach out through any of the platforms below:
+
+- [GitHub](https://github.com/sk4rz)
+- [LinkedIn](https://www.linkedin.com/in/oscar-moreno-acosta-878627376/)
+- [Hack The Box](https://app.hackthebox.com/profile/545179)
+- [X](https://x.com/sk4rz_)
+
+
 ```
    >_ [sk4rz@fs0ciety] ~
    $ whoami

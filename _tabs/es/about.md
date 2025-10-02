@@ -35,9 +35,9 @@ Espero que encuentres el contenido útil y te unas a mí en esta exploración de
 
 ## Habilidades
 - Programación en C/C++/C# y Python 
-- Lenguaje ensamblador (aprendiendo)
-- Análisis de malware (aprendiendo)
-- Ingeniería inversa (aprendiendo)
+- Lenguaje ensamblador (Aprendiendo)
+- Análisis de malware (Aprendiendo)
+- Ingeniería inversa (Aprendiendo)
 - Pentesting
 - Linux Esencial / Bash / Dotfiles
 - Seguridad web
@@ -48,7 +48,15 @@ Espero que encuentres el contenido útil y te unas a mí en esta exploración de
 - Investigación de vulnerabilidades
 - Competencias CTF
 - Programación de sistemas
-- Criptografía
+
+## Contacto
+Siempre estoy interesado en conectar con otros investigadores de seguridad, desarrolladores y estudiantes. Siéntete libre de contactarme a través de las siguientes plataformas:
+
+- [GitHub](https://github.com/sk4rz)
+- [LinkedIn](https://www.linkedin.com/in/oscar-moreno-acosta-878627376/)
+- [Hack The Box](https://app.hackthebox.com/profile/545179)
+- [X](https://x.com/sk4rz_)
+
 
 ```
    >_ [sk4rz@fs0ciety] ~
