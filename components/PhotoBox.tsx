@@ -22,11 +22,11 @@ const PhotoBox: React.FC = () => {
                      {imageError ? (
                          <div className="text-neutral-500 font-code text-center text-sm select-none p-4 flex flex-col items-center justify-center h-full w-full">
                             <p className="font-bold text-neutral-400 mb-2">[ IMAGE LOAD FAILED ]</p>
-                            <p>Ensure the file exists at: <br/><strong className="text-white">/assets/profile.png</strong></p>
+                            <p>Ensure the file exists at: <br/><strong className="text-white">/profile.png</strong></p>
                          </div>
                      ) : (
                         <img 
-                            src="/assets/profile.png" 
+                            src="/profile.png" 
                             alt="A pixelated portrait of sk4rz"
                             className="w-full h-full object-cover pixelated-look" 
                             onError={() => setImageError(true)}
