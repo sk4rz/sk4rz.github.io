@@ -13,5 +13,7 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, '.'),
     }
-  }
+  },
+  publicDir: 'public',
+  assetsInclude: ['**/*.md'],
 });
