@@ -26,7 +26,7 @@ const PhotoBox: React.FC = () => {
                          </div>
                      ) : (
                         <img 
-                            src="assets/profile.png" 
+                            src="/assets/profile.png" 
                             alt="A pixelated portrait of sk4rz"
                             className="w-full h-full object-cover pixelated-look" 
                             onError={() => setImageError(true)}
