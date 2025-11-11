@@ -1,29 +1,28 @@
+# Welcome
 
-# Welcome to My Digital Lair
+I created this space to document my learning in the interesting and complex world of low-level computing, information security, malware analysis, pentesting, and, eventually, reverse engineering.
 
-This is it—the beginning of a new chapter. I've decided to create this space to document my journey through the fascinating and complex world of low-level computing, malware analysis, and reverse engineering.
+## Why a blog?
 
-## Why Another Tech Blog?
+Good question. The internet is full of tech and hacking blogs, but my goal here is personal and educational. By writing about what I learn I force myself to structure ideas, dive deeper, and consolidate knowledge. If it's useful to others, even better.
 
-That's a fair question. The internet is saturated with tech blogs. However, my goal here is personal and educational. By writing about what I'm learning, I'm forced to structure my thoughts, dive deeper into the material, and solidify my understanding. If others can benefit from my explanations, that's a huge bonus.
+![PepeHackMud](https://tenor.com/view/pepe-hack-hack-pepo-pepe-gif-21294949)
 
-![A matrix-style terminal with green text on a black background.](https://picsum.photos/seed/hacker/600/300)
+In this space I plan to cover topics like:
 
-I plan to cover topics like:
-
--   **Assembly Language (x86/x64):** From the basics to more advanced concepts.
--   **Malware Analysis:** Dissecting real-world samples (in a safe environment, of course).
--   **Reverse Engineering:** Peeling back the layers of software to see how it ticks.
--   **C/C++ Programming:** For systems-level development and tool creation.
+- **Assembly language (x86/x64):** from basics to intermediate and advanced concepts.
+- **Malware analysis and security:** dissecting real samples from an investigative and defensive perspective.
+- **Reverse engineering:** analyzing software to understand how it works.
+- **C/C++ programming:** systems-level development.
+- **Web pentesting and CTFs:** solving Hack The Box and TryHackMe machines, showcasing interesting web pentesting techniques; over time, maybe some bug bounty.
 
 ```c
 #include <stdio.h>
 
-int main() {
-    printf("Hello, World!\\n");
+int main(int argc, char *argv[]) {
+    printf("Hello, World!\n");
     return 0;
 }
 ```
 
-This is more than just a blog; it's a public notebook. Expect raw thoughts, learning mistakes, and hopefully, some moments of discovery. Let the journey begin.
-      
+This is more than a blog: it's a public notebook where I'll share what I learn.

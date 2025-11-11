@@ -1,29 +1,35 @@
 
-# Bienvenidos a Mi Guarida Digital
+# Bienvenido
 
-Esto es todo, el comienzo de un nuevo capítulo. He decidido crear este espacio para documentar mi viaje a través del fascinante y complejo mundo de la computación de bajo nivel, el análisis de malware y la ingeniería inversa.
+He decidido crear este espacio para documentar mi aprendizaje a través del interesante y complejo mundo de la computación a bajo nivel, desarrollo de malware, pentesting y eventualmente ingeniería inversa. 
 
-## ¿Por Qué Otro Blog de Tecnología?
 
-Es una pregunta justa. Internet está saturado de blogs de tecnología. Sin embargo, mi objetivo aquí es personal y educativo. Al escribir sobre lo que estoy aprendiendo, me obligo a estructurar mis pensamientos, profundizar en el material y solidificar mi comprensión. Si otros pueden beneficiarse de mis explicaciones, eso es una gran ventaja.
+## ¿Por Qué un Blog?
 
-![Una terminal estilo matrix con texto verde sobre fondo negro.](https://picsum.photos/seed/hacker/600/300)
+Es una buena pregunta. Y la verdad es que, internet está saturado de blogs de tecnología y hacking. Sin embargo, mi objetivo aquí es personal y educativo. Al escribir sobre lo que estoy aprendiendo, me obligo a estructurar mis pensamientos, profundizar en el material y solidificar mi comprensión. Si otros pueden beneficiarse de mis explicaciones, me pone contento.
 
-Planeo cubrir temas como:
+![PepeHackMud](https://tenor.com/view/pepe-hack-hack-pepo-pepe-gif-21294949)
 
--   **Lenguaje Ensamblador (x86/x64):** Desde lo básico hasta conceptos más avanzados.
--   **Análisis de Malware:** Desglosando muestras del mundo real (en un entorno seguro, por supuesto).
--   **Ingeniería Inversa:** Quitandole las capas al software para ver cómo funciona.
--   **Programación en C/C++:** Para el desarrollo a nivel de sistemas y la creación de herramientas.
+En este espacio, planeo cubrir temas como:
+
+-   **Lenguaje Ensamblador (x86/x64):** Desde lo básico hasta conceptos intermedios/avanzados. 
+
+-   **Análisis y desarrollo de Malware:** Desglosando muestras del mundo real y creando/aplicando métodos de malware.
+
+-   **Ingeniería Inversa:** Analizando software para ver cómo funciona.
+
+-   **Programación en C/C++:** Para el desarrollo a nivel de sistemas y la creación de malware.
+
+-  **Pentesting Web y CTFs:** Desarrollando máquinas de hackthebox, tryhackme y mostrando técnicas interesantes de pentesting web (Quizás y con el tiempo algo de bug bounty). 
 
 ```c
 #include <stdio.h>
 
-int main() {
+int main(int argc, char *argv[]) {
     printf("¡Hola, Mundo!\\n");
+
     return 0;
 }
 ```
 
-Esto es más que un simple blog; es un cuaderno público. Espera pensamientos crudos, errores de aprendizaje y, con suerte, algunos momentos de descubrimiento. Que comience el viaje.
-      
+Esto es más que un simple blog, es un cuaderno público donde compartiré conocimiento mediante mi propio aprendizaje.
