@@ -23,6 +23,21 @@ const lang = getLangFromUrl(Astro.url);
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN Config -->
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script is:inline>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              code: ['Fira Code', 'monospace'],
+              display: ['VT323', 'monospace'],
+            },
+          }
+        }
+      }
+    </script>
   </head>
   <body class="bg-[#111] text-neutral-300 min-h-screen flex flex-col font-code text-base">
     <Header />

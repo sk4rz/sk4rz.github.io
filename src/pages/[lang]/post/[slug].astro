@@ -20,11 +20,24 @@ export async function getStaticPaths() {
   });
 }
 
-const { lang } = Astro.params;
+const { lang, slug } = Astro.params;
 const { post } = Astro.props;
 const { Content } = await post.render();
 
 const t = useTranslations(lang as any);
+
+// Get adjoining posts for next/prev logic
+const allPosts = await getCollection('blog');
+const langPosts = allPosts
+  .filter(p => p.slug.startsWith(`${lang}/`))
+  .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+
+const postIndex = langPosts.findIndex(p => p.slug === post.slug);
+// Notice how chronological logic works: newest is index 0. 
+// So previous post (older) is index + 1
+// Next post (newer) is index - 1
+const prevPost = langPosts[postIndex + 1];
+const nextPost = langPosts[postIndex - 1];
 ---
 
 <BaseLayout title={`${post.data.title} | sk4rz blog`}>
@@ -59,10 +72,138 @@ const t = useTranslations(lang as any);
       <Content />
     </div>
 
-    <div class="text-center mt-16 border-t border-neutral-800 pt-8">
+    </div>
+
+    <div class="mt-16 border-t border-neutral-800 pt-8">
+      <div class="flex justify-between items-start text-sm">
+        <div class="w-1/2 pr-2">
+          {prevPost && (
+            <a href={`/${lang}/post/${prevPost.slug.split('/').slice(1).join('/')}`} class="block text-left text-neutral-400 hover:text-white transition-colors">
+              &larr; {lang === 'en' ? 'Previous Post' : 'Post Anterior'} <br />
+              <span class="text-violet-400 font-semibold">{prevPost.data.title}</span>
+            </a>
+          )}
+        </div>
+        <div class="w-1/2 pl-2 text-right">
+          {nextPost && (
+            <a href={`/${lang}/post/${nextPost.slug.split('/').slice(1).join('/')}`} class="block text-right text-neutral-400 hover:text-white transition-colors">
+              {lang === 'en' ? 'Next Post' : 'Siguiente Post'} &rarr; <br />
+              <span class="text-violet-400 font-semibold">{nextPost.data.title}</span>
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-8">
       <a href={`/${lang}/archives`} class="text-neutral-500 hover:text-violet-400 text-sm transition-colors">
         &laquo; {lang === 'en' ? 'Back to Archives' : 'Volver a Archivos'} &raquo;
       </a>
     </div>
   </article>
 </BaseLayout>
+
+<script>
+  // Replicate the custom React markdown code block styling
+  document.addEventListener('DOMContentLoaded', () => {
+    const preElements = document.querySelectorAll('.prose pre');
+    
+    preElements.forEach((pre) => {
+      // Create wrapper
+      const wrapper = document.createElement('div');
+      wrapper.className = 'my-6 rounded-md border border-neutral-700 shadow-lg overflow-hidden code-block-wrapper';
+      wrapper.style.background = 'radial-gradient(circle at 0% 0%, rgba(255,255,255,0.08), transparent 25%), #282828';
+      
+      // Extract language if present
+      let lang = 'text';
+      const codeEl = pre.querySelector('code');
+      if (codeEl) {
+        const classMatch = Array.from(codeEl.classList).find(c => c.startsWith('language-'));
+        if (classMatch) {
+          lang = classMatch.replace('language-', '');
+        }
+      }
+      
+      // Create Top Bar
+      const topBar = document.createElement('div');
+      topBar.className = 'flex items-center justify-between px-4 py-1.5 bg-neutral-800/50 border-b border-neutral-700';
+      
+      const langSpan = document.createElement('span');
+      langSpan.className = 'text-xs font-code text-neutral-400';
+      langSpan.textContent = lang;
+      
+      const actionsDiv = document.createElement('div');
+      actionsDiv.className = 'flex items-center gap-4';
+      
+      const copyBtn = document.createElement('button');
+      copyBtn.className = 'px-2.5 py-1 rounded-md text-xs transition-all duration-200 flex items-center gap-1.5 bg-neutral-900/60 hover:bg-neutral-700/60 copy-btn';
+      copyBtn.ariaLabel = 'Copy code';
+      copyBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neutral-400 icon-copy"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-400 hidden animate-pulse icon-check"><path d="M20 6 9 17l-5-5"/></svg>
+        <span class="text-neutral-300 btn-text">Copy</span>
+      `;
+      
+      const windowDots = document.createElement('div');
+      windowDots.className = 'flex items-center gap-1.5';
+      windowDots.innerHTML = `
+        <div class="w-2.5 h-2.5 rounded-full bg-neutral-700"></div>
+        <div class="w-2.5 h-2.5 rounded-full bg-neutral-600"></div>
+        <div class="w-2.5 h-2.5 rounded-full bg-neutral-500"></div>
+      `;
+      
+      actionsDiv.appendChild(copyBtn);
+      actionsDiv.appendChild(windowDots);
+      topBar.appendChild(langSpan);
+      topBar.appendChild(actionsDiv);
+      
+      // Style pre
+      pre.style.margin = '0';
+      pre.style.backgroundColor = 'transparent';
+      pre.style.fontSize = '0.9em';
+      pre.style.padding = '1rem';
+      
+      // Wrap
+      pre.parentNode?.insertBefore(wrapper, pre);
+      wrapper.appendChild(topBar);
+      wrapper.appendChild(pre);
+      
+      // Add Copy Logic
+      copyBtn.addEventListener('click', () => {
+        const text = pre.innerText;
+        navigator.clipboard.writeText(text);
+        
+        copyBtn.classList.remove('bg-neutral-900/60', 'hover:bg-neutral-700/60');
+        copyBtn.classList.add('bg-green-500/30');
+        
+        const iconCopy = copyBtn.querySelector('.icon-copy');
+        const iconCheck = copyBtn.querySelector('.icon-check');
+        const btnText = copyBtn.querySelector('.btn-text');
+        
+        if(iconCopy) iconCopy.classList.add('hidden');
+        if(iconCheck) iconCheck.classList.remove('hidden');
+        if(btnText) {
+          btnText.textContent = 'Copied!';
+          btnText.classList.replace('text-neutral-300', 'text-white');
+        }
+        
+        setTimeout(() => {
+          copyBtn.classList.add('bg-neutral-900/60', 'hover:bg-neutral-700/60');
+          copyBtn.classList.remove('bg-green-500/30');
+          if(iconCopy) iconCopy.classList.remove('hidden');
+          if(iconCheck) iconCheck.classList.add('hidden');
+          if(btnText) {
+            btnText.textContent = 'Copy';
+            btnText.classList.replace('text-white', 'text-neutral-300');
+          }
+        }, 2000);
+      });
+    });
+    
+    // Style inline code blocks nicely so they match the React component fallback
+    const inlineCodes = document.querySelectorAll('.prose code:not(pre code)');
+    inlineCodes.forEach(code => {
+      code.className = 'font-code text-violet-300 bg-white/10 px-1.5 py-0.5 rounded-md';
+    });
+  });
+</script>
