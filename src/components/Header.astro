@@ -62,7 +62,6 @@ const searchPlaceholder = t('search');
         <a
           href={altLangUrl}
           id="lang-toggle"
-          data-astro-history="replace"
           class="px-4 py-1 text-sm bg-transparent border border-neutral-700 text-neutral-300 hover:bg-neutral-800 hover:text-white rounded-md transition-colors"
         >
           {lang === 'en' ? 'ES' : 'EN'}
@@ -129,7 +128,7 @@ const searchPlaceholder = t('search');
 </div>
 
 <script>
-  document.addEventListener('astro:page-load', () => {
+  document.addEventListener('DOMContentLoaded', () => {
     // Mobile Menu Logic
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const closeDrawerBtn = document.getElementById('close-drawer-btn');
@@ -180,20 +179,12 @@ const searchPlaceholder = t('search');
       });
     }
     
-    // Smooth language toggle scroll preservation for Astro router
+    // Save scroll state ONLY on language toggle click to prevent jumping on load
     const langToggle = document.getElementById('lang-toggle');
     if (langToggle) {
       langToggle.addEventListener('click', (e) => {
-        // We set session storage as a fallback, but data-astro-history="replace" should handle the soft navigation.
-        sessionStorage.setItem('sk4rz-scroll-pos', window.scrollY.toString());
+        sessionStorage.setItem('sk4rz-lang-toggle-scroll', window.scrollY.toString());
       });
     }
   });
-
-  // Execute scroll restore immediately on load to prevent jumping
-  const savedScroll = sessionStorage.getItem('sk4rz-scroll-pos');
-  if (savedScroll !== null) {
-    window.scrollTo({ top: parseInt(savedScroll, 10), behavior: 'instant' });
-    sessionStorage.removeItem('sk4rz-scroll-pos');
-  }
 </script>
