@@ -127,53 +127,55 @@ const searchPlaceholder = t('search');
 </div>
 
 <script>
-  // Mobile Menu Logic
-  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-  const closeDrawerBtn = document.getElementById('close-drawer-btn');
-  const drawer = document.getElementById('mobile-menu-drawer');
-  const overlay = drawer?.querySelector('.shadow-overlay');
-  const iconOpen = document.getElementById('icon-open');
-  const iconClose = document.getElementById('icon-close');
-  
-  function toggleMenu(force?: boolean) {
-    if (!drawer || !iconOpen || !iconClose || !mobileMenuBtn) return;
+  document.addEventListener('astro:page-load', () => {
+    // Mobile Menu Logic
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const closeDrawerBtn = document.getElementById('close-drawer-btn');
+    const drawer = document.getElementById('mobile-menu-drawer');
+    const overlay = drawer?.querySelector('.shadow-overlay');
+    const iconOpen = document.getElementById('icon-open');
+    const iconClose = document.getElementById('icon-close');
     
-    const isCurrentlyClosed = drawer.classList.contains('translate-x-full');
-    const willOpen = force !== undefined ? force : isCurrentlyClosed;
-    
-    if (willOpen) {
-      drawer.classList.remove('translate-x-full');
-      drawer.classList.add('translate-x-0');
-      drawer.setAttribute('aria-hidden', 'false');
-      mobileMenuBtn.setAttribute('aria-expanded', 'true');
-      iconOpen.classList.add('hidden');
-      iconOpen.classList.remove('block');
-      iconClose.classList.add('block');
-      iconClose.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    } else {
-      drawer.classList.add('translate-x-full');
-      drawer.classList.remove('translate-x-0');
-      drawer.setAttribute('aria-hidden', 'true');
-      mobileMenuBtn.setAttribute('aria-expanded', 'false');
-      iconOpen.classList.add('block');
-      iconOpen.classList.remove('hidden');
-      iconClose.classList.add('hidden');
-      iconClose.classList.remove('block');
-      document.body.style.overflow = '';
+    function toggleMenu(force?: boolean) {
+      if (!drawer || !iconOpen || !iconClose || !mobileMenuBtn) return;
+      
+      const isCurrentlyClosed = drawer.classList.contains('translate-x-full');
+      const willOpen = force !== undefined ? force : isCurrentlyClosed;
+      
+      if (willOpen) {
+        drawer.classList.remove('translate-x-full');
+        drawer.classList.add('translate-x-0');
+        drawer.setAttribute('aria-hidden', 'false');
+        mobileMenuBtn.setAttribute('aria-expanded', 'true');
+        iconOpen.classList.add('hidden');
+        iconOpen.classList.remove('block');
+        iconClose.classList.add('block');
+        iconClose.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      } else {
+        drawer.classList.add('translate-x-full');
+        drawer.classList.remove('translate-x-0');
+        drawer.setAttribute('aria-hidden', 'true');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        iconOpen.classList.add('block');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+        iconClose.classList.remove('block');
+        document.body.style.overflow = '';
+      }
     }
-  }
 
-  mobileMenuBtn?.addEventListener('click', () => toggleMenu());
-  closeDrawerBtn?.addEventListener('click', () => toggleMenu(false));
-  overlay?.addEventListener('click', () => toggleMenu(false));
-  
-  // Search query persistence
-  const params = new URLSearchParams(window.location.search);
-  const q = params.get('q');
-  if (q) {
-    document.querySelectorAll('.search-input').forEach(input => {
-      (input as HTMLInputElement).value = q;
-    });
-  }
+    mobileMenuBtn?.addEventListener('click', () => toggleMenu());
+    closeDrawerBtn?.addEventListener('click', () => toggleMenu(false));
+    overlay?.addEventListener('click', () => toggleMenu(false));
+    
+    // Search query persistence
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get('q');
+    if (q) {
+      document.querySelectorAll('.search-input').forEach(input => {
+        (input as HTMLInputElement).value = q;
+      });
+    }
+  });
 </script>
