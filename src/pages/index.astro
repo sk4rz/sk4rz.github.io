@@ -1,4 +1,13 @@
----
-// Redirect to default language
-return Astro.redirect('/en/');
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0;url=/en/" />
+    <title>Redirecting...</title>
+    <script>
+        window.location.replace("/en/");
+    </script>
+</head>
+<body style="background-color: #171717; color: #171717;">
+</body>
+</html>

@@ -163,6 +163,17 @@ const nextPost = langPosts[postIndex - 1];
       pre.style.fontSize = '0.9em';
       pre.style.padding = '1rem';
       
+      // Add explicit Line Numbers
+      if (codeEl) {
+        const codeStr = codeEl.innerHTML;
+        const lines = codeStr.split('\n');
+        if (lines[lines.length - 1] === '') lines.pop();
+        
+        codeEl.innerHTML = lines.map((line, index) => {
+          return `<span style="display:inline-block; width:2em; user-select:none; color:#665c54; text-align:right; margin-right:1em;">${index + 1}</span><span>${line}</span>`;
+        }).join('\n');
+      }
+
       // Wrap
       pre.parentNode?.insertBefore(wrapper, pre);
       wrapper.appendChild(topBar);

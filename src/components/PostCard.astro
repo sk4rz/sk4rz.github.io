@@ -8,7 +8,8 @@ export interface Props {
 
 const { post } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
-const postUrl = `/${lang}/post/${post.slug}`;
+const slugWithoutLang = post.slug.split('/').slice(1).join('/');
+const postUrl = `/${lang}/post/${slugWithoutLang}`;
 
 // we assume post is already mapped to extract language, or we extract it here from post.data
 // Wait, let's just use what they have locally in the format:
