@@ -1,0 +1,27 @@
+---
+const profileImage = "/profile.png";
+---
+
+<div class="pixelated-look bg-[#c0c0c0] p-1 border-t-2 border-l-2 border-white border-b-2 border-r-2 border-neutral-700 shadow-lg">
+    {/* Title Bar */}
+    <div class="flex items-center justify-between bg-[#808080] pl-2 pr-1 h-7 cursor-default">
+        <span class="font-display text-white text-base select-none tracking-wide">C:\Users\sk4rz\Picture.jpg</span>
+        <div class="flex items-center space-x-1">
+            <button aria-label="Minimize" class="w-4 h-4 bg-[#c0c0c0] border-t border-l border-white border-b border-r border-neutral-700 flex items-center justify-center font-bold text-black text-xs leading-none pb-0.5">_</button>
+            <button aria-label="Maximize" class="w-4 h-4 bg-[#c0c0c0] border-t border-l border-white border-b border-r border-neutral-700 flex items-center justify-center font-bold text-black text-xs leading-none">
+                <span class="w-2 h-2 border border-black block"></span>
+            </button>
+            <button aria-label="Close" class="w-4 h-4 bg-[#c0c0c0] border-t border-l border-white border-b border-r border-neutral-700 flex items-center justify-center font-bold text-black text-xs leading-none pb-0.5">X</button>
+        </div>
+    </div>
+    {/* Content */}
+    <div class="p-1 mt-1 border-t-2 border-l-2 border-neutral-700 border-b-2 border-r-2 border-white">
+        <div class="aspect-square border-t border-l border-black border-b border-r border-neutral-600 bg-[#111]">
+            <img 
+                src={profileImage} 
+                alt="A pixelated portrait of sk4rz"
+                class="w-full h-full object-cover pixelated-look" 
+            />
+        </div>
+    </div>
+</div>

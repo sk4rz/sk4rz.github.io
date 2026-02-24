@@ -1,8 +1,7 @@
 ---
 import { languages, useTranslations } from '../../i18n/utils';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-// A simplified PhotoBox since it wasn't migrated fully. Or we can just use an image directly.
-// In the original it was a component, let's just inline a placeholder or keep visual structure
+import PhotoBox from '../../components/PhotoBox.astro';
 
 export async function getStaticPaths() {
   return Object.keys(languages).map((lang) => ({ params: { lang } }));
@@ -36,11 +35,7 @@ const profileImage = "/profile.png"; // We'll copy this over later
       </div>
       
       <div class="md:col-span-2 space-y-8">
-          <div class="relative w-full aspect-square md:aspect-auto md:h-64 rounded-xl overflow-hidden shadow-2xl border border-neutral-800 bg-neutral-900 pixelated-look">
-             <img src={profileImage} alt="Profile" class="w-full h-full object-cover" />
-             <div class="absolute inset-0 bg-violet-500/10 mix-blend-overlay"></div>
-             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-          </div>
+          <PhotoBox />
 
           <div>
               <h3 class="font-display text-2xl text-white mb-3">{t('skills')}</h3>

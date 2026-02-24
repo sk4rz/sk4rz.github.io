@@ -26,21 +26,6 @@ const lang = getLangFromUrl(Astro.url);
     
     <!-- Prism Gruvbox Dark Theme -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-gruvbox-dark.min.css" rel="stylesheet" />
-    
-    <!-- Tailwind CSS CDN Config -->
-    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-    <script is:inline>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              code: ['Fira Code', 'monospace'],
-              display: ['VT323', 'monospace'],
-            },
-          }
-        }
-      }
-    </script>
   </head>
   <body class="bg-[#111] text-neutral-300 min-h-screen flex flex-col font-code text-base">
     <Header />
