@@ -7,9 +7,6 @@ export default defineConfig({
     base: '/',
     integrations: [tailwind()],
     markdown: {
-        syntaxHighlight: 'shiki',
-        shikiConfig: {
-            theme: 'vitesse-dark', // High-quality modern dark theme mimicking gruvbox contrast
-        }
+        syntaxHighlight: 'prism',
     }
 });

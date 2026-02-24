@@ -93,61 +93,59 @@ const recentPosts = langPosts.slice(0, 5);
 </BaseLayout>
 
 <script define:vars={{ allPosts: langPosts.map(p => ({ slug: p.slug.split('/').slice(1).join('/'), title: p.data.title, excerpt: p.data.excerpt, date: p.data.date, tags: p.data.tags })), lang }}>
-  document.addEventListener('astro:page-load', () => {
-    // Simple client-side search logic
-    const params = new URLSearchParams(window.location.search);
-    const q = params.get('q');
+  // Simple client-side search logic
+  const params = new URLSearchParams(window.location.search);
+  const q = params.get('q');
+  
+  if (q && q.trim() !== '') {
+    const query = q.toLowerCase();
+    const pagedPosts = document.getElementById('paged-posts');
+    const pagination = document.getElementById('pagination-wrapper');
+    const searchAlert = document.getElementById('search-alert');
+    const searchTermSpan = document.getElementById('search-term');
+    const searchResults = document.getElementById('search-results');
+    const noResults = document.getElementById('no-results');
     
-    if (q && q.trim() !== '') {
-      const query = q.toLowerCase();
-      const pagedPosts = document.getElementById('paged-posts');
-      const pagination = document.getElementById('pagination-wrapper');
-      const searchAlert = document.getElementById('search-alert');
-      const searchTermSpan = document.getElementById('search-term');
-      const searchResults = document.getElementById('search-results');
-      const noResults = document.getElementById('no-results');
-      
-      if (pagedPosts) pagedPosts.classList.add('hidden');
-      if (pagination) pagination.classList.add('hidden');
-      if (searchAlert) {
-        searchAlert.classList.remove('hidden');
-        if (searchTermSpan) searchTermSpan.textContent = `"${q}"`;
-      }
-      
-      const matched = allPosts.filter(p => 
-        p.title.toLowerCase().includes(query) || 
-        p.excerpt.toLowerCase().includes(query)
-      );
-      
-      if (matched.length > 0) {
-        if (searchResults) {
-          searchResults.classList.remove('hidden');
-          searchResults.innerHTML = matched.map(post => `
-            <article class="bg-white/5 p-6 border border-white/10 rounded-lg shadow-lg transition-all duration-300 hover:bg-white/10 hover:border-white/20">
-              <header>
-                <h2 class="text-2xl font-display text-white mb-2">
-                  <a href="/${lang}/post/${post.slug}" class="hover:text-violet-400 transition-colors">
-                     ${post.title}
-                  </a>
-                </h2>
-                <p class="text-sm text-neutral-500">${post.date}</p>
-              </header>
-              <div class="mt-4 text-neutral-300">
-                <p class="text-justify">${post.excerpt}</p>
-              </div>
-              <footer class="mt-6 flex flex-wrap gap-2">
-                ${post.tags.map(tag => `
-                  <a href="/${lang}/tags/${tag}" class="text-xs bg-transparent text-neutral-400 px-2 py-1 border border-neutral-700 rounded-full transition-colors hover:bg-violet-500/10 hover:border-violet-500 hover:text-violet-400">
-                    #${tag}
-                  </a>
-                `).join('')}
-              </footer>
-            </article>
-          `).join('');
-        }
-      } else {
-        if (noResults) noResults.classList.remove('hidden');
-      }
+    if (pagedPosts) pagedPosts.classList.add('hidden');
+    if (pagination) pagination.classList.add('hidden');
+    if (searchAlert) {
+      searchAlert.classList.remove('hidden');
+      if (searchTermSpan) searchTermSpan.textContent = `"${q}"`;
     }
-  });
+    
+    const matched = allPosts.filter(p => 
+      p.title.toLowerCase().includes(query) || 
+      p.excerpt.toLowerCase().includes(query)
+    );
+    
+    if (matched.length > 0) {
+      if (searchResults) {
+        searchResults.classList.remove('hidden');
+        searchResults.innerHTML = matched.map(post => `
+          <article class="bg-white/5 p-6 border border-white/10 rounded-lg shadow-lg transition-all duration-300 hover:bg-white/10 hover:border-white/20">
+            <header>
+              <h2 class="text-2xl font-display text-white mb-2">
+                <a href="/${lang}/post/${post.slug}" class="hover:text-violet-400 transition-colors">
+                   ${post.title}
+                </a>
+              </h2>
+              <p class="text-sm text-neutral-500">${post.date}</p>
+            </header>
+            <div class="mt-4 text-neutral-300">
+              <p class="text-justify">${post.excerpt}</p>
+            </div>
+            <footer class="mt-6 flex flex-wrap gap-2">
+              ${post.tags.map(tag => `
+                <a href="/${lang}/tags/${tag}" class="text-xs bg-transparent text-neutral-400 px-2 py-1 border border-neutral-700 rounded-full transition-colors hover:bg-violet-500/10 hover:border-violet-500 hover:text-violet-400">
+                  #${tag}
+                </a>
+              `).join('')}
+            </footer>
+          </article>
+        `).join('');
+      }
+    } else {
+      if (noResults) noResults.classList.remove('hidden');
+    }
+  }
 </script>

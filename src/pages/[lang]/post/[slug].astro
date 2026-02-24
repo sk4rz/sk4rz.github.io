@@ -100,7 +100,7 @@ const nextPost = langPosts[postIndex - 1];
 
 <script>
   // Replicate the exact React markdown code block styling with Ventanita dots
-  document.addEventListener('astro:page-load', () => {
+  document.addEventListener('DOMContentLoaded', () => {
     const preElements = document.querySelectorAll('.prose pre');
     
     preElements.forEach((pre) => {
