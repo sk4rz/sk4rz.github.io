@@ -1,0 +1,179 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const pathname = Astro.url.pathname;
+const altLang = lang === 'en' ? 'es' : 'en';
+
+// Strip the current language prefix if any, to reconstruct the alternate URL
+const pathWithoutLang = pathname.startsWith(`/${lang}/`) 
+  ? pathname.replace(`/${lang}/`, '/') 
+  : (pathname === `/${lang}` ? '/' : pathname);
+
+const altLangUrl = `/${altLang}${pathWithoutLang === '/' ? '' : pathWithoutLang}`;
+
+const links = [
+  { to: `/${lang}/`, label: t('home') },
+  { to: `/${lang}/about`, label: t('about') },
+  { to: `/${lang}/archives`, label: t('archives') },
+  { to: `/${lang}/tags`, label: t('tags') },
+];
+
+const searchPlaceholder = t('search');
+---
+
+<header class="bg-black/80 backdrop-blur-[2px] sticky top-0 z-40 border-b border-neutral-800">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center space-x-4">
+        <a href={`/${lang}/`} class="text-xl font-display text-white flex items-baseline gap-2 whitespace-nowrap">
+          <span>sk4rz@blog:~</span>
+          <span class="text-sm text-violet-400 hidden sm:inline">[//]</span>
+        </a>
+        <nav class="hidden sm:flex items-baseline space-x-2">
+          {links.map((link) => {
+             const isActive = pathname === link.to || (link.to !== `/${lang}/` && pathname.startsWith(link.to));
+             return (
+               <a 
+                 href={link.to} 
+                 class={`px-3 py-2 text-sm transition-colors duration-200 ${isActive ? 'text-white' : 'text-neutral-400 hover:text-white'}`}
+               >
+                 {link.label}
+               </a>
+             );
+          })}
+        </nav>
+      </div>
+      
+      <div class="flex items-center space-x-4">
+        <div class="relative hidden sm:block">
+          <form action={`/${lang}/`} method="get" class="search-form">
+            <input
+              type="text"
+              name="q"
+              placeholder={searchPlaceholder}
+              class="search-input bg-neutral-900 border border-neutral-700 text-white placeholder-neutral-500 py-1 px-3 focus:outline-none focus:border-violet-500 rounded-md text-sm w-48 transition-colors"
+            />
+          </form>
+        </div>
+        
+        <a
+          href={altLangUrl}
+          class="px-4 py-1 text-sm bg-transparent border border-neutral-700 text-neutral-300 hover:bg-neutral-800 hover:text-white rounded-md transition-colors"
+        >
+          {lang === 'en' ? 'ES' : 'EN'}
+        </a>
+        
+        <div class="sm:hidden">
+          <button
+              id="mobile-menu-btn"
+              type="button"
+              class="inline-flex items-center justify-center p-2 rounded-md text-neutral-400 hover:text-white hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+          >
+              <span class="sr-only">Open main menu</span>
+              <svg id="icon-open" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+              <svg id="icon-close" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu Drawer -->
+<div
+  id="mobile-menu-drawer"
+  class="fixed inset-0 z-50 transform transition-transform duration-300 ease-in-out translate-x-full"
+  aria-hidden="true"
+>
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm shadow-overlay"></div>
+  
+  <div class="absolute top-0 right-0 h-full w-4/5 max-w-sm bg-[#111] border-l-2 border-violet-500/50 p-4 flex flex-col shadow-2xl">
+    <div class="bg-neutral-800 flex items-center justify-between pl-3 pr-1 py-1 mb-8">
+        <span class="font-display text-white select-none">NAV_MENU</span>
+        <button id="close-drawer-btn" aria-label="Close menu" class="w-6 h-6 bg-[#c0c0c0] border-t border-l border-white border-b border-r border-neutral-700 flex items-center justify-center font-bold text-black text-xs leading-none pb-0.5">X</button>
+    </div>
+    
+    <form action={`/${lang}/`} method="get" class="search-form relative mb-6 flex items-center bg-black p-2 border border-neutral-700">
+      <span class="text-violet-400 font-code mr-2 select-none">$</span>
+      <input
+        type="text"
+        name="q"
+        placeholder={searchPlaceholder}
+        class="search-input bg-transparent text-white placeholder-neutral-500 w-full focus:outline-none font-code text-base"
+      />
+    </form>
+
+    <nav class="flex flex-col space-y-2 px-2">
+      {links.map((link) => {
+        const isActive = pathname === link.to || (link.to !== `/${lang}/` && pathname.startsWith(link.to));
+        return (
+          <a href={link.to} class={`group flex items-center font-display text-3xl py-2 transition-colors duration-200 ${isActive ? 'text-white' : 'text-neutral-500 hover:text-white'}`}>
+             <span class={`mr-4 select-none transition-colors ${isActive ? 'text-violet-400' : 'text-neutral-700 group-hover:text-violet-400'}`}>{'>'}</span>
+             <span>{link.label}</span>
+          </a>
+        );
+      })}
+    </nav>
+  </div>
+</div>
+
+<script>
+  // Mobile Menu Logic
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const closeDrawerBtn = document.getElementById('close-drawer-btn');
+  const drawer = document.getElementById('mobile-menu-drawer');
+  const overlay = drawer?.querySelector('.shadow-overlay');
+  const iconOpen = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+  
+  function toggleMenu(force?: boolean) {
+    if (!drawer || !iconOpen || !iconClose || !mobileMenuBtn) return;
+    
+    const isCurrentlyClosed = drawer.classList.contains('translate-x-full');
+    const willOpen = force !== undefined ? force : isCurrentlyClosed;
+    
+    if (willOpen) {
+      drawer.classList.remove('translate-x-full');
+      drawer.classList.add('translate-x-0');
+      drawer.setAttribute('aria-hidden', 'false');
+      mobileMenuBtn.setAttribute('aria-expanded', 'true');
+      iconOpen.classList.add('hidden');
+      iconOpen.classList.remove('block');
+      iconClose.classList.add('block');
+      iconClose.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    } else {
+      drawer.classList.add('translate-x-full');
+      drawer.classList.remove('translate-x-0');
+      drawer.setAttribute('aria-hidden', 'true');
+      mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      iconOpen.classList.add('block');
+      iconOpen.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+      iconClose.classList.remove('block');
+      document.body.style.overflow = '';
+    }
+  }
+
+  mobileMenuBtn?.addEventListener('click', () => toggleMenu());
+  closeDrawerBtn?.addEventListener('click', () => toggleMenu(false));
+  overlay?.addEventListener('click', () => toggleMenu(false));
+  
+  // Search query persistence
+  const params = new URLSearchParams(window.location.search);
+  const q = params.get('q');
+  if (q) {
+    document.querySelectorAll('.search-input').forEach(input => {
+      (input as HTMLInputElement).value = q;
+    });
+  }
+</script>

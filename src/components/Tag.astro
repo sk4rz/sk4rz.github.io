@@ -1,0 +1,18 @@
+---
+import { getLangFromUrl } from '../i18n/utils';
+
+export interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const tagUrl = `/${lang}/tags/${name}`;
+---
+
+<a 
+  href={tagUrl} 
+  class="text-xs bg-transparent text-neutral-400 px-2 py-1 border border-neutral-700 rounded-full transition-colors hover:bg-violet-500/10 hover:border-violet-500 hover:text-violet-400"
+>
+  #{name}
+</a>

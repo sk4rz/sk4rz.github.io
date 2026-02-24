@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import { languages, useTranslations } from '../../../i18n/utils';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Pagination from '../../../components/Pagination.astro';
+
+export async function getStaticPaths({ paginate }: { paginate: any }) {
+  const allPosts = await getCollection('blog');
+  
+  // Sort by date descending
+  allPosts.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+
+  return Object.keys(languages).flatMap((lang) => {
+    const langPosts = allPosts.filter(post => post.slug.startsWith(`${lang}/`));
+    return paginate(langPosts, {
+      params: { lang },
+      pageSize: 10,
+    });
+  });
+}
+
+const { lang } = Astro.params;
+const { page } = Astro.props;
+const t = useTranslations(lang as any);
+---
+
+<BaseLayout title={`Archives | sk4rz blog`}>
+  <div class="max-w-3xl mx-auto">
+    <header class="text-left mb-12">
+      <h1 class="text-6xl md:text-7xl font-display text-white mb-2">{t('archives')}</h1>
+      <p class="text-neutral-400">A full chronological list of all posts.</p>
+    </header>
+    <div class="space-y-8">
+      <section>
+        <ul class="space-y-4">
+          {page.data.map((post: any) => {
+            const slugParts = post.slug.split('/');
+            const slug = slugParts.slice(1).join('/');
+            return (
+              <li class="flex flex-col sm:flex-row sm:items-baseline">
+                <span class="text-neutral-500 text-sm mr-4 w-28 shrink-0">{post.data.date}</span>
+                <a href={`/${lang}/post/${slug}`} class="text-neutral-200 hover:text-violet-400 transition-colors">
+                  {post.data.title}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+      
+      <Pagination currentPage={page.currentPage} totalPages={page.lastPage} basePath={`/${lang}/archives`} />
+    </div>
+  </div>
+</BaseLayout>

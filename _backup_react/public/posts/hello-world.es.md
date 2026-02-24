@@ -8,7 +8,7 @@ He decidido crear este espacio para documentar mi aprendizaje a través del inte
 
 Es una buena pregunta. Y la verdad es que, internet está saturado de blogs de tecnología y hacking. Sin embargo, mi objetivo aquí es personal y educativo. Al escribir sobre lo que estoy aprendiendo, me obligo a estructurar mis pensamientos, profundizar en el material y solidificar mi comprensión. Si otros pueden beneficiarse de mis explicaciones, me pone contento.
 
-![PepeHackMud](https://tenor.com/view/pepe-hack-hack-pepo-pepe-gif-21294949)
+<div class="tenor-gif-embed" data-postid="21294949" data-share-method="host" data-aspect-ratio="1" data-width="100%"><a href="https://tenor.com/view/pepe-hack-hack-pepo-pepe-gif-21294949">Pepe Hack Hack Sticker</a>from <a href="https://tenor.com/search/pepe+hack-stickers">Pepe Hack Stickers</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 
 En este espacio, planeo cubrir temas como:
 

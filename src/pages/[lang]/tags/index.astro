@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import { languages, useTranslations } from '../../../i18n/utils';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Tag from '../../../components/Tag.astro';
+
+export async function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as any);
+
+const allPosts = await getCollection('blog');
+const langPosts = allPosts.filter(post => post.slug.startsWith(`${lang}/`));
+
+// Get unique tags and count
+const tagCounts: Record<string, number> = {};
+langPosts.forEach(post => {
+  post.data.tags.forEach((tag: string) => {
+    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+  });
+});
+
+const sortedTags = Object.keys(tagCounts).sort();
+---
+
+<BaseLayout title={`Tags | sk4rz blog`}>
+  <div class="max-w-3xl mx-auto">
+    <header class="text-left mb-12">
+      <h1 class="text-6xl md:text-7xl font-display text-white mb-2">{t('tags')}</h1>
+      <p class="text-neutral-400">All topics covered in the blog.</p>
+    </header>
+    
+    <div class="bg-white/5 p-8 border border-white/10 rounded-lg shadow-lg">
+      <div class="flex flex-wrap gap-4">
+        {sortedTags.map(tag => (
+          <div class="flex items-center gap-2">
+            <Tag name={tag} />
+            <span class="text-neutral-500 text-sm font-code">({tagCounts[tag]})</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</BaseLayout>

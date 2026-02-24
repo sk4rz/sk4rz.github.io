@@ -1,3 +1,9 @@
+---
+title: "Hello, World"
+date: "2025-11-11"
+tags: ["intro", "meta", "blogging"]
+excerpt: "Welcome to my new blog! This is the first post, a classic 'Hello, World' to get things started. Here I'll be documenting my journey into malware, hacking, and low-level systems."
+---
 # Welcome
 
 I created this space to document my learning in the interesting and complex world of low-level computing, information security, malware analysis, pentesting, and, eventually, reverse engineering.
@@ -6,7 +12,7 @@ I created this space to document my learning in the interesting and complex worl
 
 Good question. The internet is full of tech and hacking blogs, but my goal here is personal and educational. By writing about what I learn I force myself to structure ideas, dive deeper, and consolidate knowledge. If it's useful to others, even better.
 
-![PepeHackMud](https://tenor.com/view/pepe-hack-hack-pepo-pepe-gif-21294949)
+<div class="tenor-gif-embed" data-postid="21294949" data-share-method="host" data-aspect-ratio="1" data-width="100%"><a href="https://tenor.com/view/pepe-hack-hack-pepo-pepe-gif-21294949">Pepe Hack Hack Sticker</a>from <a href="https://tenor.com/search/pepe+hack-stickers">Pepe Hack Stickers</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 
 In this space I plan to cover topics like:
 
@@ -20,7 +26,7 @@ In this space I plan to cover topics like:
 #include <stdio.h>
 
 int main(int argc, char *argv[]) {
-    printf("Hello, World!\n");
+    printf("Hello, World!\\n");
     return 0;
 }
 ```

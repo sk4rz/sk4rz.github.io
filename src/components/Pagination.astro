@@ -1,0 +1,72 @@
+---
+export interface Props {
+  currentPage: number;
+  totalPages: number;
+  basePath: string; // the base path, e.g. /en or /en/tags/programming
+}
+
+const { currentPage, totalPages, basePath } = Astro.props;
+
+function createPageUrl(pageNumber: number) {
+  // basePath shouldn't have trailing slash for consistency
+  const cleanBasePath = basePath.endsWith('/') ? basePath.slice(0, -1) : basePath;
+  if (pageNumber === 1) {
+    return cleanBasePath === '' ? '/' : cleanBasePath;
+  }
+  return `${cleanBasePath}/${pageNumber}`;
+}
+
+const pagesToShow = new Set<number>();
+if (totalPages > 0) {
+  pagesToShow.add(1);
+  pagesToShow.add(totalPages);
+  if (currentPage > 1) pagesToShow.add(currentPage - 1);
+  pagesToShow.add(currentPage);
+  if (currentPage < totalPages) pagesToShow.add(currentPage + 1);
+}
+
+const sortedPages = Array.from(pagesToShow).sort((a,b) => a-b).filter(p => p > 0 && p <= totalPages);
+---
+
+{totalPages > 1 && (
+  <nav class="flex justify-center items-center gap-2 mt-12">
+    {currentPage > 1 && (
+      <a
+        href={createPageUrl(currentPage - 1)}
+        class="px-4 py-2 border border-neutral-700 rounded-md transition-colors text-sm bg-transparent text-neutral-400 hover:bg-neutral-800 hover:border-neutral-600"
+      >
+        &larr; Prev
+      </a>
+    )}
+
+    {sortedPages.map((page, index) => {
+      const prevPage = index > 0 ? sortedPages[index - 1] : 0;
+      return (
+        <>
+          {prevPage > 0 && page > prevPage + 1 && (
+            <span class="px-4 py-2 text-neutral-500">...</span>
+          )}
+          <a
+            href={createPageUrl(page)}
+            class={`px-4 py-2 border border-neutral-700 rounded-md transition-colors text-sm ${
+              currentPage === page
+                ? 'bg-violet-500/20 border-violet-500 text-white'
+                : 'bg-transparent text-neutral-400 hover:bg-neutral-800 hover:border-neutral-600'
+            }`}
+          >
+            {page}
+          </a>
+        </>
+      );
+    })}
+
+    {currentPage < totalPages && (
+      <a
+        href={createPageUrl(currentPage + 1)}
+        class="px-4 py-2 border border-neutral-700 rounded-md transition-colors text-sm bg-transparent text-neutral-400 hover:bg-neutral-800 hover:border-neutral-600"
+      >
+        Next &rarr;
+      </a>
+    )}
+  </nav>
+)}

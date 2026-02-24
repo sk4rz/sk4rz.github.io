@@ -1,0 +1,93 @@
+---
+import { languages, useTranslations } from '../../i18n/utils';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+// A simplified PhotoBox since it wasn't migrated fully. Or we can just use an image directly.
+// In the original it was a component, let's just inline a placeholder or keep visual structure
+
+export async function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as any);
+
+const profileImage = "/profile.png"; // We'll copy this over later
+---
+
+<BaseLayout title="About | sk4rz blog">
+  <div class="max-w-5xl mx-auto">
+    <header class="text-left mb-12">
+      <h1 class="text-6xl md:text-7xl font-display text-white mb-2">{t('about')}</h1>
+      <p class="text-neutral-400">A little more about the person behind the keyboard.</p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-12">
+      <div class="md:col-span-3 prose prose-invert max-w-none prose-p:text-neutral-300 prose-headings:font-display prose-headings:text-white prose-a:text-violet-400 hover:prose-a:underline prose-ul:pl-5 prose-li:marker:text-violet-500">
+        <h2 class="text-4xl !mt-0">{t('about_me')}</h2>
+        <p>{t('about_p1')}</p>
+        <p>{t('about_p2')}</p>
+        <ul>
+          <li>{t('topic1')}</li>
+          <li>{t('topic2')}</li>
+          <li>{t('topic3')}</li>
+          <li>{t('topic4')}</li>
+        </ul>
+        <p>{t('about_p3')}</p>
+      </div>
+      
+      <div class="md:col-span-2 space-y-8">
+          <div class="relative w-full aspect-square md:aspect-auto md:h-64 rounded-xl overflow-hidden shadow-2xl border border-neutral-800 bg-neutral-900 pixelated-look">
+             <img src={profileImage} alt="Profile" class="w-full h-full object-cover" />
+             <div class="absolute inset-0 bg-violet-500/10 mix-blend-overlay"></div>
+             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          </div>
+
+          <div>
+              <h3 class="font-display text-2xl text-white mb-3">{t('skills')}</h3>
+              <ul class="space-y-1 text-neutral-400 list-disc list-inside">
+                  <li>{t('skill1')}</li>
+                  <li>{t('skill2')}</li>
+                  <li>{t('skill3')}</li>
+                  <li>{t('skill4')}</li>
+                  <li>{t('skill5')}</li>
+                  <li>{t('skill6')}</li>
+                  <li>{t('skill7')}</li>
+              </ul>
+          </div>
+           <div>
+              <h3 class="font-display text-2xl text-white mb-3">{t('interests')}</h3>
+              <ul class="space-y-1 text-neutral-400 list-disc list-inside">
+                  <li>{t('interest1')}</li>
+                  <li>{t('interest2')}</li>
+                  <li>{t('interest3')}</li>
+                  <li>{t('interest4')}</li>
+                  <li>{t('interest5')}</li>
+                  <li>{t('interest6')}</li>
+              </ul>
+          </div>
+           <div>
+              <h3 class="font-display text-2xl text-white mb-3">{t('contact')}</h3>
+              <p class="text-neutral-400 mb-3 text-justify">{t('contact_p')}</p>
+              <div class="flex flex-wrap gap-4">
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-neutral-300 hover:text-violet-400 hover:underline transition-colors">
+                    GitHub
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-60"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  </a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-neutral-300 hover:text-violet-400 hover:underline transition-colors">
+                    LinkedIn
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-60"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  </a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-neutral-300 hover:text-violet-400 hover:underline transition-colors">
+                    Hack The Box
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-60"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  </a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-neutral-300 hover:text-violet-400 hover:underline transition-colors">
+                    X
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-60"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  </a>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

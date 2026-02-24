@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import { languages, useTranslations } from '../../../../i18n/utils';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import PostCard from '../../../../components/PostCard.astro';
+import Pagination from '../../../../components/Pagination.astro';
+
+export async function getStaticPaths({ paginate }: { paginate: any }) {
+  const allPosts = await getCollection('blog');
+  
+  // Sort by date descending
+  allPosts.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+
+  return Object.keys(languages).flatMap((lang) => {
+    const langPosts = allPosts.filter(post => post.slug.startsWith(`${lang}/`));
+    const uniqueTags = [...new Set(langPosts.flatMap(post => post.data.tags))];
+    
+    return uniqueTags.flatMap(tag => {
+      const filteredPosts = langPosts.filter(post => post.data.tags.includes(tag));
+      return paginate(filteredPosts, {
+        params: { lang, tag },
+        pageSize: 10,
+      });
+    });
+  });
+}
+
+const { lang, tag } = Astro.params;
+const { page } = Astro.props;
+const t = useTranslations(lang as any);
+---
+
+<BaseLayout title={`Posts tagged #${tag} | sk4rz blog`}>
+  <div class="max-w-3xl mx-auto">
+    <header class="text-left mb-12">
+      <h1 class="text-4xl md:text-5xl font-display text-white mb-2">
+        {t('posts_tagged_with')} <span class="text-violet-400">#{tag}</span>
+      </h1>
+      <p class="text-neutral-400">
+        Showing {page.start + 1}-{page.end + 1} of {page.total} posts
+      </p>
+    </header>
+
+    <div class="space-y-8">
+      {page.data.length > 0 ? (
+        page.data.map((post: any) => <PostCard post={post} />)
+      ) : (
+        <div class="bg-white/5 p-6 border border-white/10 rounded-lg text-center text-neutral-400">
+          <p>{t('no_posts_found')}</p>
+        </div>
+      )}
+
+      <Pagination currentPage={page.currentPage} totalPages={page.lastPage} basePath={`/${lang}/tags/${tag}`} />
+    </div>
+  </div>
+</BaseLayout>

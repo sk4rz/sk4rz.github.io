@@ -1,0 +1,151 @@
+---
+import { getCollection } from 'astro:content';
+import { languages, useTranslations } from '../../i18n/utils';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import Tag from '../../components/Tag.astro';
+import Pagination from '../../components/Pagination.astro';
+
+export async function getStaticPaths({ paginate }: { paginate: any }) {
+  const allPosts = await getCollection('blog');
+  
+  // Sort by date descending
+  allPosts.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+
+  return Object.keys(languages).flatMap((lang) => {
+    const langPosts = allPosts.filter(post => post.slug.startsWith(`${lang}/`));
+    return paginate(langPosts, {
+      params: { lang },
+      pageSize: 3,
+    });
+  });
+}
+
+const { lang } = Astro.params;
+const { page } = Astro.props;
+const t = useTranslations(lang as any);
+
+// For sidebar
+const allPosts = await getCollection('blog');
+const langPosts = allPosts.filter(post => post.slug.startsWith(`${lang}/`)).sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+
+const allTags = [...new Set(langPosts.flatMap(p => p.data.tags))];
+const recentPosts = langPosts.slice(0, 5);
+---
+
+<BaseLayout title="sk4rz blog">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div class="lg:col-span-2 space-y-8" id="posts-container">
+      <div id="search-alert" class="hidden text-neutral-400 mb-4">
+        {t('search_results_for')} <span id="search-term" class="text-white"></span>
+      </div>
+      
+      <div id="paged-posts" class="space-y-8">
+        {page.data.map((post: any) => (
+          <PostCard post={post} />
+        ))}
+      </div>
+      
+      <!-- Container for search results injects by client-side JS -->
+      <div id="search-results" class="hidden space-y-8"></div>
+      
+      <div id="no-results" class="hidden bg-white/5 p-6 border border-white/10 rounded-lg text-center text-neutral-400">
+        <p>{t('no_results_found')}</p>
+      </div>
+
+      <div id="pagination-wrapper">
+        <Pagination currentPage={page.currentPage} totalPages={page.lastPage} basePath={`/${lang}`} />
+      </div>
+    </div>
+    
+    <aside class="space-y-8 lg:mt-0">
+      <div class="bg-white/5 p-4 border border-white/10 rounded-lg shadow-lg">
+        <h3 class="font-display text-xl text-white mb-4 px-2">{t('recently_updated')}</h3>
+        <div class="px-2">
+          <ul class="space-y-3">
+            {recentPosts.map(post => {
+              const slugParts = post.slug.split('/');
+              const slug = slugParts.slice(1).join('/');
+              return (
+                <li class="panel-link">
+                  <a href={`/${lang}/post/${slug}`} class="text-neutral-300 hover:text-violet-400 transition-colors">
+                    <span class="link-text">{post.data.title}</span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
+      
+      <div class="bg-white/5 p-4 border border-white/10 rounded-lg shadow-lg">
+        <h3 class="font-display text-xl text-white mb-4 px-2">{t('trending_tags')}</h3>
+        <div class="px-2">
+          <div class="flex flex-wrap gap-2">
+            {allTags.map(tag => (
+              <Tag name={tag} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</BaseLayout>
+
+<script define:vars={{ allPosts: langPosts.map(p => ({ slug: p.slug.split('/').slice(1).join('/'), title: p.data.title, excerpt: p.data.excerpt, date: p.data.date, tags: p.data.tags })), lang }}>
+  // Simple client-side search logic
+  const params = new URLSearchParams(window.location.search);
+  const q = params.get('q');
+  
+  if (q && q.trim() !== '') {
+    const query = q.toLowerCase();
+    const pagedPosts = document.getElementById('paged-posts');
+    const pagination = document.getElementById('pagination-wrapper');
+    const searchAlert = document.getElementById('search-alert');
+    const searchTermSpan = document.getElementById('search-term');
+    const searchResults = document.getElementById('search-results');
+    const noResults = document.getElementById('no-results');
+    
+    if (pagedPosts) pagedPosts.classList.add('hidden');
+    if (pagination) pagination.classList.add('hidden');
+    if (searchAlert) {
+      searchAlert.classList.remove('hidden');
+      if (searchTermSpan) searchTermSpan.textContent = `"${q}"`;
+    }
+    
+    const matched = allPosts.filter(p => 
+      p.title.toLowerCase().includes(query) || 
+      p.excerpt.toLowerCase().includes(query)
+    );
+    
+    if (matched.length > 0) {
+      if (searchResults) {
+        searchResults.classList.remove('hidden');
+        searchResults.innerHTML = matched.map(post => `
+          <article class="bg-white/5 p-6 border border-white/10 rounded-lg shadow-lg transition-all duration-300 hover:bg-white/10 hover:border-white/20">
+            <header>
+              <h2 class="text-3xl font-display text-white mb-2">
+                <a href="/${lang}/post/${post.slug}" class="hover:text-violet-400 transition-colors">
+                   ${post.title}
+                </a>
+              </h2>
+              <p class="text-sm text-neutral-500">${post.date}</p>
+            </header>
+            <div class="mt-4 text-neutral-300">
+              <p class="text-justify">${post.excerpt}</p>
+            </div>
+            <footer class="mt-6 flex flex-wrap gap-2">
+              ${post.tags.map(tag => `
+                <a href="/${lang}/tags/${tag}" class="text-xs bg-transparent text-neutral-400 px-2 py-1 border border-neutral-700 rounded-full transition-colors hover:bg-violet-500/10 hover:border-violet-500 hover:text-violet-400">
+                  #${tag}
+                </a>
+              `).join('')}
+            </footer>
+          </article>
+        `).join('');
+      }
+    } else {
+      if (noResults) noResults.classList.remove('hidden');
+    }
+  }
+</script>
