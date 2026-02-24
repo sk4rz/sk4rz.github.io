@@ -12,9 +12,9 @@ const postUrl = `/${lang}/post/${post.slug}`;
 
 // we assume post is already mapped to extract language, or we extract it here from post.data
 // Wait, let's just use what they have locally in the format:
-const title = post.data?.title?.[lang] || post.title?.[lang];
+const title = post.data?.title || post.title;
 const date = post.data?.date || post.date;
-const excerpt = post.data?.excerpt?.[lang] || post.excerpt?.[lang];
+const excerpt = post.data?.excerpt || post.excerpt;
 const tags = post.data?.tags || post.tags || [];
 ---
 

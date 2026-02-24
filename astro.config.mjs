@@ -6,4 +6,7 @@ export default defineConfig({
     site: 'https://sk4rz.github.io',
     base: '/',
     integrations: [tailwind()],
+    markdown: {
+        syntaxHighlight: 'prism',
+    }
 });
