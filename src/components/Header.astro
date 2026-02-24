@@ -62,6 +62,7 @@ const searchPlaceholder = t('search');
         <a
           href={altLangUrl}
           id="lang-toggle"
+          data-astro-history="replace"
           class="px-4 py-1 text-sm bg-transparent border border-neutral-700 text-neutral-300 hover:bg-neutral-800 hover:text-white rounded-md transition-colors"
         >
           {lang === 'en' ? 'ES' : 'EN'}
@@ -128,64 +129,68 @@ const searchPlaceholder = t('search');
 </div>
 
 <script>
-  // Mobile Menu Logic
-  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-  const closeDrawerBtn = document.getElementById('close-drawer-btn');
-  const drawer = document.getElementById('mobile-menu-drawer');
-  const overlay = drawer?.querySelector('.shadow-overlay');
-  const iconOpen = document.getElementById('icon-open');
-  const iconClose = document.getElementById('icon-close');
-  
-  function toggleMenu(force?: boolean) {
-    if (!drawer || !iconOpen || !iconClose || !mobileMenuBtn) return;
+  document.addEventListener('astro:page-load', () => {
+    // Mobile Menu Logic
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const closeDrawerBtn = document.getElementById('close-drawer-btn');
+    const drawer = document.getElementById('mobile-menu-drawer');
+    const overlay = drawer?.querySelector('.shadow-overlay');
+    const iconOpen = document.getElementById('icon-open');
+    const iconClose = document.getElementById('icon-close');
     
-    const isCurrentlyClosed = drawer.classList.contains('translate-x-full');
-    const willOpen = force !== undefined ? force : isCurrentlyClosed;
-    
-    if (willOpen) {
-      drawer.classList.remove('translate-x-full');
-      drawer.classList.add('translate-x-0');
-      drawer.setAttribute('aria-hidden', 'false');
-      mobileMenuBtn.setAttribute('aria-expanded', 'true');
-      iconOpen.classList.add('hidden');
-      iconOpen.classList.remove('block');
-      iconClose.classList.add('block');
-      iconClose.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    } else {
-      drawer.classList.add('translate-x-full');
-      drawer.classList.remove('translate-x-0');
-      drawer.setAttribute('aria-hidden', 'true');
-      mobileMenuBtn.setAttribute('aria-expanded', 'false');
-      iconOpen.classList.add('block');
-      iconOpen.classList.remove('hidden');
-      iconClose.classList.add('hidden');
-      iconClose.classList.remove('block');
-      document.body.style.overflow = '';
+    function toggleMenu(force?: boolean) {
+      if (!drawer || !iconOpen || !iconClose || !mobileMenuBtn) return;
+      
+      const isCurrentlyClosed = drawer.classList.contains('translate-x-full');
+      const willOpen = force !== undefined ? force : isCurrentlyClosed;
+      
+      if (willOpen) {
+        drawer.classList.remove('translate-x-full');
+        drawer.classList.add('translate-x-0');
+        drawer.setAttribute('aria-hidden', 'false');
+        mobileMenuBtn.setAttribute('aria-expanded', 'true');
+        iconOpen.classList.add('hidden');
+        iconOpen.classList.remove('block');
+        iconClose.classList.add('block');
+        iconClose.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      } else {
+        drawer.classList.add('translate-x-full');
+        drawer.classList.remove('translate-x-0');
+        drawer.setAttribute('aria-hidden', 'true');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        iconOpen.classList.add('block');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+        iconClose.classList.remove('block');
+        document.body.style.overflow = '';
+      }
     }
-  }
 
-  mobileMenuBtn?.addEventListener('click', () => toggleMenu());
-  closeDrawerBtn?.addEventListener('click', () => toggleMenu(false));
-  overlay?.addEventListener('click', () => toggleMenu(false));
-  
-  // Search query persistence
-  const params = new URLSearchParams(window.location.search);
-  const q = params.get('q');
-  if (q) {
-    document.querySelectorAll('.search-input').forEach(input => {
-      (input as HTMLInputElement).value = q;
-    });
-  }
-  
-  // Language Toggle Scroll Restoration
-  const langToggle = document.getElementById('lang-toggle');
-  if (langToggle) {
-    langToggle.addEventListener('click', () => {
-      sessionStorage.setItem('sk4rz-scroll-pos', window.scrollY.toString());
-    });
-  }
-  
+    mobileMenuBtn?.addEventListener('click', () => toggleMenu());
+    closeDrawerBtn?.addEventListener('click', () => toggleMenu(false));
+    overlay?.addEventListener('click', () => toggleMenu(false));
+    
+    // Search query persistence
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get('q');
+    if (q) {
+      document.querySelectorAll('.search-input').forEach(input => {
+        (input as HTMLInputElement).value = q;
+      });
+    }
+    
+    // Smooth language toggle scroll preservation for Astro router
+    const langToggle = document.getElementById('lang-toggle');
+    if (langToggle) {
+      langToggle.addEventListener('click', (e) => {
+        // We set session storage as a fallback, but data-astro-history="replace" should handle the soft navigation.
+        sessionStorage.setItem('sk4rz-scroll-pos', window.scrollY.toString());
+      });
+    }
+  });
+
+  // Execute scroll restore immediately on load to prevent jumping
   const savedScroll = sessionStorage.getItem('sk4rz-scroll-pos');
   if (savedScroll !== null) {
     window.scrollTo({ top: parseInt(savedScroll, 10), behavior: 'instant' });
